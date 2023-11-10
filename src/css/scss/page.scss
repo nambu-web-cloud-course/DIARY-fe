@@ -1,0 +1,590 @@
+@charset "utf-8";
+
+/***************************************************************************************
+   Setting
+***************************************************************************************/
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box; 
+
+	&:before,
+	&:after {
+		box-sizing: border-box;
+	}
+}
+
+body, button, input, select, table, textarea, h1, h2, h3, h4 {
+	font-family: 'Dongle', -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Apple SD Gothic Neo", sans-serif;
+  color:#1B1A1A;
+}
+
+html, body {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+	-webkit-overflow-scrolling: touch;
+	background-color: #fff;
+	font-size:24px;
+	line-height:1em;
+
+}
+ul, ol {
+	list-style: none;
+}
+img, button, fieldset {
+	border: 0 none;
+}
+table {
+	width:100%;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+em, address, i {
+	font-style: normal;
+}
+a, u {
+	text-decoration: none;
+	color:#000;
+}
+fieldset, legend {
+	border: 0;
+}
+legend {
+	height: 0;
+	visibility: hidden; 
+}
+button {
+	background: none;
+}
+button * {
+	position: relative;
+}
+button::-moz-focus-inner {
+	padding: 0;
+	border: 0;
+}
+input::-ms-clear,
+input[type=password]::-ms-reveal {
+	display: none;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+	
+	margin: 0;
+}
+input {
+	box-sizing: border-box;
+}
+textarea {
+	resize: none;
+}
+a, button, input, select, textarea, [contenteditable] {
+	outline: 0;
+}
+button, select, input[type=checkbox], input[type=radio] {
+	cursor: pointer;
+}
+button:disabled, input:disabled {
+	cursor: default;
+}
+
+
+.wrap-page {
+	width:720px;
+	min-height:100vh;
+	display:flex;
+	flex-direction: column;
+	margin:0 auto;
+	background:#fbf3ed;
+}
+
+
+@media screen and (max-width: 720px) {
+	.wrap-page {
+		width:100%;
+	}
+    
+}
+.layout-header {
+	flex:none;
+	.header-top {
+		display:flex;
+		position:realtive;
+		height:55px;
+		justify-content: center;
+		.btn-back {
+			flex:none;
+			width:55px;
+			height:55px;
+
+		}
+		.txt-logo {
+			position:absolute;
+			top:0;
+			left:0;
+			right:0;
+			text-align:center;
+			font-size:48px;
+			font-weight:bold;
+			line-height:48px;
+			color:#af7d59;
+			
+		}
+		.ui-right {
+			position:relative;
+			margin-right:24px;
+			z-index:2;
+			margin-left:auto;
+			text-align:right;
+			display:flex;
+			align-items: center;
+			align-items: right;
+			z-index:3;
+
+			.link-login {
+				margin-left:30px;
+			}
+		}
+		
+	}
+	.header-menu {
+		display:flex;
+		padding:0 10px;
+		margin-left:-3px;
+		border-bottom:1px solid #af7d59;
+		a {
+			flex:auto;
+			line-height:35px;
+			text-align:center;
+			border-radius:10px 10px 0 0;
+			margin-left:3px;
+			border:1px solid #af7d59;
+			border-bottom:none;
+			color:#af7d59;
+			font-weight:bold;
+			&:hover {
+				background-color:#af7d59;
+				color:#fff;
+				transition:all 0.3s;
+			}
+
+		}
+	}
+}
+.layout-container {
+	flex:auto;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+}
+
+@keyframes shake {
+	from {
+		transform: rotate(15deg);
+	}
+	to {
+		transform: rotate(-15deg);
+	}
+  }
+.page-main {
+	display:flex;
+	flex-wrap:wrap;
+	.box-info {
+		width:50%;
+		padding:20px;
+		display:flex;
+		align-items: center;
+		justify-content: center;
+		
+		.ui-info {
+			border-radius:10px;
+			background-color:#e9cca5;
+			height:200px;
+			max-width:200px;
+			overflow:auto;
+			width:100%;
+			.txt-title {
+				padding:10px 0 0 0;
+				font-size:30px;
+				text-align:center;
+				font-weight:bold;
+				color:#694537;
+			}
+			.txt-det {
+				display:block;
+				text-align:center;
+			}
+			&:hover {
+				animation-name: shake;
+				animation-duration: 2s;
+				animation-iteration-count: infinite;
+			}
+
+		}
+	}
+}
+/***************************************************************************************
+   Calendar
+***************************************************************************************/
+.react-calendar {
+	border:3px solid #5f5251;
+	background-color:#fdfbea;
+	overflow:hidden;
+	border-radius:10px;
+	.react-calendar__navigation {
+		padding:10px 0;
+		background-color:#f9dadf;
+		text-align:center;
+		button {
+			font-size:30px;
+
+		}
+		.react-calendar__navigation__label__labelText {
+			margin:0 20px;
+
+		}
+	}
+	.react-calendar__month-view__weekdays__weekday {
+		padding:10px 0;
+		text-align:center;
+		font-weight:bold;
+		font-size:30px;
+		background-color:#f3e3db;
+	}
+	.react-calendar__month-view__days__day {
+		height:100px;
+		padding:0 5px;
+		font-size:25px;
+		display:flex;
+	}
+}
+
+/***************************************************************************************
+   Component
+***************************************************************************************/
+.p-component {
+	background-color:#fff;
+}
+.ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-options {
+	background-color:#fff;
+}
+.ql-toolbar.ql-snow {
+	border:none !important;
+	border-bottom:1px solid #ccc !important;
+}
+.ql-container.ql-snow {
+	border:none !important;
+}
+.edit-detail {
+	position:relative;
+	background-color:#fff;
+	&:after {
+		position:absolute;
+		top:0;
+		left:0;
+		right:0;
+		bottom:0;
+		content:'';
+		z-index:50;
+	}
+	.p-editor-toolbar {
+		display:none;
+	}
+}
+.page-title {
+	display:flex;
+	margin:30px 0;
+	padding:0 0 0 20px;
+	line-height:1em;
+	font-size:40px;
+	border-left:4px solid #ef8c9e;
+	border-radius:3px;
+	
+}
+.fix-buttons {
+	position:absolute;
+	bottom:0;
+	left:0;
+	right:0;
+	padding:30px;
+	.form-button {
+		min-width:100%;
+		height:45px;
+		font-size:30px;
+		
+	}
+
+}
+.ui-buttons {
+	padding:30px 0;
+	display:flex;
+	.form-button {
+		margin:0 5px;
+	}
+	.type-right {
+		margin-left:auto;
+	}
+}
+.form-button {
+	display:inline-block;
+	padding:3px 0;
+	border-radius:5px;
+	background-color:#b17b53;
+	color:#fff;
+	align-items: center;
+	justify-content: center;
+	min-width:75px;
+	text-align:center;
+	font-size:24px;
+	height:37px;
+	flex:none;
+	&.type-dark {
+		background-color:#48352e;
+		&:hover {
+			background-color:#000;
+		}
+	}
+	&.type-s-dark {
+		width:50px;
+		font-size:20px;
+		height:30px;
+		background-color:#48352e;
+		&:hover {
+			background-color:#000;
+		}
+
+	}
+	&:hover {
+		background-color:#48352e;
+		transition:all 0.3s;
+	}
+}
+.form-type {
+	display:flex;
+	&+.form-type {
+		margin-top:10px;
+	}
+	.form-button {
+		margin-left:10px;
+	}
+}
+.form-input {
+	border-radius:5px;
+	overflow:hidden;
+	border:1px solid #a3a3a3;
+	width:100%;
+	display:block;
+	padding:0 10px;
+	font-size:24px;
+}
+.data-nodata {
+	padding:50px 0;
+	text-align:center;
+	color:#48352e;
+}
+/***************************************************************************************
+   Page : Todo list
+***************************************************************************************/
+.page-todolist {
+	padding:0 30px;
+	.page-title {
+		color:#ee4e6b;
+	}
+	.data-day {
+		padding-bottom:13px;
+		font-size:30px;
+
+	}
+	.form-create {
+		input {
+			display:block;
+		}
+	}
+	.wrap-list {
+		padding:15px 0;
+		.form-list {
+			display:flex;
+			align-items: center;
+			&+.form-list {
+				margin-top:5px;
+			}
+
+		}
+		.data-list {
+			flex:auto;
+		}
+	}
+
+}
+
+
+/***************************************************************************************
+   Page : Diary
+***************************************************************************************/
+.page-diary {
+	padding:0 30px 105px 30px;
+	flex:auto;
+	position:relative;
+	height:100%;
+
+	.top-diary {
+		display:flex;
+		.data-category {
+			flex:none;
+			display:inline-block;
+			margin-right:10px;
+			background-color:#d95428;
+			color:#fff;
+			font-size:18px;
+			border-radius:5px;
+			line-height:1em;
+			padding:3px 10px;
+		}
+		.data-name {
+			display:block;
+			white-space:nowrap;
+			text-overflow:ellipsis;
+			overflow:hidden;
+			font-size:26px;
+		}
+
+	}
+	
+	.page-title {
+		color:#d95428;
+		border-left-color:#d95428;
+	}
+	.ui-day {
+		.data-day {
+			text-align:right;
+			padding-bottom:10px;
+		}
+
+	}
+	.data-day {
+		padding:30px 0 0 0;
+		font-size:30px;
+	}
+	.wrap-box {
+		display:flex;
+		flex-wrap:wrap;
+		margin:0 -10px;
+		align-items: center;
+
+	}
+	.box-diary {
+		display:flex;
+		flex-direction: column;;
+		align-items: center;;
+		width:50%;
+		padding:0 10px;
+		.box-title {
+			width:100%;
+			max-width:300px;
+			padding-bottom:10px;
+			.data-category {
+				display:inline-block;
+				margin-bottom:5px;
+				background-color:#d95428;
+				color:#fff;
+				font-size:18px;
+				border-radius:5px;
+				line-height:1em;
+				padding:3px 10px;
+			}
+			.data-name {
+				display:block;
+				white-space:nowrap;
+				text-overflow:ellipsis;
+				overflow:hidden;
+				font-size:26px;
+			}
+		}
+		.data-image {
+			width:100%;
+			max-width:300px;
+			height:150px;
+			border-radius:5px;
+			overflow:hidden;
+			border:1px solid #c3c1c5;
+		}
+
+	}
+}
+
+/***************************************************************************************
+   Page : Calendar
+***************************************************************************************/
+.page-calendar {
+	padding: 30px;
+	.ui-list {
+		padding:30px 0;
+		.list-form + .txt-label {
+			margin-top:50px;
+
+		}
+		.txt-label {
+			padding:0 20px 10px 10px;
+			font-size:40px;
+			border-bottom:1px solid #ca9180;
+		}
+
+@keyframes goshake {
+	from {
+		margin-left:0;
+	}
+	to {
+		margin-left:10px;
+		margin-right:-10px;
+	}
+  }
+		.list-form {
+			margin:10px 0 0 0;
+			li {
+				.data-list {
+					flex:auto;
+					white-space:nowrap;
+					text-overflow:ellipsis;
+					overflow:hidden;
+					margin:0 10px;
+				}
+				&+li {
+					margin-top:10px;
+				}
+				a {
+					display:flex;
+					padding:10px 20px;
+					border-radius:3px;
+					background-color:#e7c9bd;
+					font-size:27px;
+					border-radius:5px;
+					box-shadow: 5px 2px 2px #ca9180;
+					&:after {
+						flex:none;
+						margin-left:20px;
+						content:'>'
+					}
+					&:hover {
+						animation-name: goshake;
+						animation-duration: 0.6s;
+						animation-iteration-count: infinite;
+						animation-timing-function: ease-in-out;
+
+
+					}
+				}
+			}
+		}
+	}
+}
+/***************************************************************************************
+   Page : Gallary
+***************************************************************************************/
+.page-gallary {
+	padding:0 30px;
+	.react-calendar__month-view {
+		display:none;
+	}
+}

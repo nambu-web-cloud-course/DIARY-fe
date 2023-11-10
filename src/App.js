@@ -1,11 +1,12 @@
 
 import './App.css';
-import Editor_test from './editortest/Editor_test';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import Header from './page/layout/Header';
 
 function App() {
   return (
-    <div className="App">
-      <Editor_test></Editor_test>
+    <div className="wrap-page">
+      <Header></Header>
     </div>
   );
 }
