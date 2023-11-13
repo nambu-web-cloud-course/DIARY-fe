@@ -1,13 +1,12 @@
-const mysql = require('mysql');
-const con = mysql.createConnection({
-    host:'localhost',
-    user:'dbuser',
-    password:'Pass1234',
-    database:'school',
-});
-con.connect();
-con.query('select * from test_service', (error, rows)=> {
-    if (error) throw error;
-    console.log('test:',rows);
-});
-con.end();
+const express = require('express');
+const app = express();
+
+const sequelize = require('./models').sequelize;
+sequelize.sync();
+
+app.use(express.json());
+
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+    console.log(`Server On : http://localhost:${PORT}/`);
+})

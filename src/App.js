@@ -7,6 +7,7 @@ function App() {
   return (
     <div className="wrap-page">
       <Header></Header>
+    
     </div>
   );
 }

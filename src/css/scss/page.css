@@ -412,15 +412,17 @@ button:disabled, input:disabled {
 .page-todolist .wrap-list {
   padding: 15px 0;
 }
-.page-todolist .wrap-list .form-list {
+.page-todolist .wrap-list .form-list li {
+  width: 100%;
   display: flex;
   align-items: center;
 }
-.page-todolist .wrap-list .form-list + .form-list {
+.page-todolist .wrap-list .form-list li + li {
   margin-top: 5px;
 }
 .page-todolist .wrap-list .data-list {
   flex: auto;
+  margin: 0 10px;
 }
 
 /***************************************************************************************

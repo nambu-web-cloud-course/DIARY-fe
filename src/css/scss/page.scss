@@ -405,15 +405,18 @@ button:disabled, input:disabled {
 	.wrap-list {
 		padding:15px 0;
 		.form-list {
-			display:flex;
-			align-items: center;
-			&+.form-list {
-				margin-top:5px;
+			li {
+				width:100%;
+				display:flex;
+				align-items: center;
+				&+li {
+					margin-top:5px;
+				}
 			}
-
 		}
 		.data-list {
 			flex:auto;
+			margin:0 10px;
 		}
 	}
 

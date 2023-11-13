@@ -1,6 +1,20 @@
 
 import React, { useState } from "react";
 function Todolist() {
+    const [toDo,setTodo] = useState("");
+    const [toDos,setTodos] = useState([]);
+    const onChange = (e) => {
+        setTodo(e.target.value)
+        console.log(toDo)
+    }
+    const onSubmit = (e) => {
+        e.preventDefault();
+         if(toDo === ""){
+            return
+        }
+        setTodos((currentArray) => [toDo, ...currentArray])
+        setTodo("")
+    }  
     return (
         <div >
 
@@ -14,11 +28,12 @@ function Todolist() {
                     <div className="data-day">2023.11.09(목)</div>
 
                     {/* Form */}
-                    <div className="form-type">
-                        <input type="text" placeholder="Todo 리스트를 추가해주세요 " className="form-input"/>
-                        <a haref="javascript:" class="form-button">추가</a>
-                    </div>
-
+                  
+                    <form className="form-type" onSubmit={onSubmit}>
+                        <input type="text" placeholder="Todo 리스트를 추가해주세요 " className="form-input" onChange={onChange} value={toDo}/>
+                        <button class="form-button">추가</button>
+                    </form> 
+                    
                     {/* Form */}
                     <div className="form-type">
                         <input type="text" placeholder="Todo 리스트를 검색해주세요. " className="form-input"/>
@@ -32,30 +47,18 @@ function Todolist() {
                             Todo 리스트를 추가해주세요.
 
                         </div>
-                        <div className="form-list">
-                            <input type="checkbox"></input>
-                            <div className="data-list">
-                            스토리보드 완성
-                            </div>
-
-                            <a haref="javascript:" class="form-button type-s-dark">삭제</a>
-                        </div>
-                        <div className="form-list">
-                            <input type="checkbox"></input>
-                            <div className="data-list">
-                            스토리보드 완성
-                            </div>
-
-                            <a haref="javascript:" class="form-button type-s-dark">삭제</a>
-                        </div>
-                        <div className="form-list">
-                            <input type="checkbox"></input>
-                            <div className="data-list">
-                            스토리보드 완성
-                            </div>
-
-                            <a haref="javascript:" class="form-button type-s-dark">삭제</a>
-                        </div>
+                        <ul className="form-list">
+                            {toDos.map((item)=>
+                             <li>
+                                <input type="checkbox"></input>
+                                <div className="data-list">
+                                {item}
+                                </div>
+                                <a haref="javascript:" class="form-button type-s-dark">삭제</a>
+                            </li>
+                            )}
+                        </ul> 
+                       
                     </div>
 
                 </div>
@@ -66,3 +69,4 @@ function Todolist() {
 }
 
 export default Todolist;
+

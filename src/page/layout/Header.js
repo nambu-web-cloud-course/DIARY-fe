@@ -17,7 +17,7 @@ function Header() {
             
                 <div className="ui-right">
                 <div className="data-id">User id</div>
-                <a href="javascript:" className="link-login">로그인</a>
+                <Link to="/login" className="link-login">로그인</Link>
                 
                 </div>
             </div>
