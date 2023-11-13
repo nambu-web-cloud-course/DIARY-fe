@@ -1,8 +1,18 @@
 
-import React, { useState } from "react";
+import {useState, useEffect} from "react"
+import axios from "axios"
 function Todolist() {
     const [toDo,setTodo] = useState("");
     const [toDos,setTodos] = useState([]);
+    useEffect(()=> {
+
+        axios.get('https://jsonplaceholder.typicode.com/posts')
+        .then(res => {
+            setTodos(res.data)
+        }).catch(error => {
+          console.log(error)
+        }, [])
+      })
     const onChange = (e) => {
         setTodo(e.target.value)
         console.log(toDo)
@@ -15,6 +25,7 @@ function Todolist() {
         setTodos((currentArray) => [toDo, ...currentArray])
         setTodo("")
     }  
+    console.log(setTodos)
     return (
         <div >
 
@@ -52,7 +63,7 @@ function Todolist() {
                              <li>
                                 <input type="checkbox"></input>
                                 <div className="data-list">
-                                {item}
+                                {item.title}
                                 </div>
                                 <a haref="javascript:" class="form-button type-s-dark">삭제</a>
                             </li>
