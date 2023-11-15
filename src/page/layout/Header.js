@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Calendar from 'react-calendar';
-import { Link } from "react-router-dom";
+import { Link, NavLink} from "react-router-dom";
 import RoutesPage from "../routes/RoutesPage"
-
-
 
 function Header() {
 
   return (
-     <div className="layout-header">
-        <BrowserRouter>
+    <>
+    <BrowserRouter>
+        <div className="layout-header">
             {/* Header Top */}
             <div className="header-top">
                 <Link to="/" className="txt-logo">D.I.A.R.Y</Link>
@@ -21,15 +20,17 @@ function Header() {
                 
                 </div>
             </div>
-            <div className="header-menu">
-                <Link to="/todolist">Todo 리스트</Link>
-                <Link to="/diary">다이어리</Link>
-                <Link to="/calendar">캘린더</Link>
-                <Link to="/gallary">갤러리</Link>
+            <div className="header-menu" >
+                <NavLink to="/todolist" className={({ isActive }) => (isActive ?  " is-selected " : "")}>Todo 리스트</NavLink>
+                <NavLink to="/diary" className={({ isActive }) => "" + (isActive ? " is-selected " : "")}>다이어리</NavLink>
+                <NavLink to="/calendar" className={({ isActive }) => "" + (isActive ? " is-selected " : "")}>캘린더</NavLink>
+                <NavLink to="/gallary" className={({ isActive }) => "" + (isActive ? " is-selected " : "")}>갤러리</NavLink>
             </div>
-            <RoutesPage></RoutesPage>
-        </BrowserRouter>
-   </div>
+        </div>
+        
+        <RoutesPage></RoutesPage>
+    </BrowserRouter>
+    </>
 
   );
 }

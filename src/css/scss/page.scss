@@ -164,6 +164,7 @@ button:disabled, input:disabled {
 			border-bottom:none;
 			color:#af7d59;
 			font-weight:bold;
+			&.is-selected,
 			&:hover {
 				background-color:#af7d59;
 				color:#fff;
@@ -452,12 +453,6 @@ button:disabled, input:disabled {
 			overflow:hidden;
 			font-size:26px;
 		}
-
-	}
-	
-	.page-title {
-		color:#d95428;
-		border-left-color:#d95428;
 	}
 	.ui-day {
 		.data-day {
@@ -521,7 +516,7 @@ button:disabled, input:disabled {
    Page : Calendar
 ***************************************************************************************/
 .page-calendar {
-	padding: 30px;
+	padding: 0 30px;
 	.ui-list {
 		padding:30px 0;
 		.list-form + .txt-label {
@@ -587,7 +582,137 @@ button:disabled, input:disabled {
 ***************************************************************************************/
 .page-gallary {
 	padding:0 30px;
+	.ui-top {
+		display:flex;
+		align-items: flex-start;
+		.form-button {
+			height:50px;
+			padding:11px 0;
+			margin-left:10px;
+
+		}
+		select {
+			margin-left:auto;
+			font-size:20px;
+			line-height:50px;
+			height:50px;
+			padding:0 10px;
+			option {
+				font-size:20px;;
+			}
+		}
+	}
+	
 	.react-calendar__month-view {
 		display:none;
+	}
+	.react-calendar {
+		width:200px;
+		.react-calendar__navigation {
+			padding:0;
+			button {
+				font-size:30px;
+			}
+			.react-calendar__navigation__label__labelText {
+				font-size:20px;
+			}
+		}
+	}
+}
+
+/***************************************************************************************
+   Page : Login
+***************************************************************************************/
+.page-login {
+	margin-top:-103px;
+	height:100vh;
+	background-color:#fbf3ed;
+	z-index:3;
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
+
+	.form-login {
+		width:500px;
+
+		margin:0 auto;
+	}
+	@media screen and (max-width: 720px) {
+		.form-login {
+			padding:0 50px;
+			width:100%;
+	
+			margin:0 auto;
+		}
+
+	}
+	.ui-logo {
+		text-align:center;
+		.txt-logo { 
+			display:inline-block;
+			margin-bottom:60px;
+			text-align:center;
+			font-size:48px;
+			font-weight:bold;
+			line-height:48px;
+			color:#af7d59;
+			
+		}
+	}
+	
+	
+	.txt-label {
+		padding-bottom:30px;
+		text-align:center;
+	}
+	.form-div {
+		
+		margin-bottom:30px;
+		.form-label {
+			margin-bottom:10px;
+			font-size:33px;
+		} 
+		
+	}
+	.form-multi {
+		display:flex;
+		input {
+			flex:auto;
+			width:100%;
+		}
+		.form-button {
+			width:100px;
+			margin-left:10px;
+
+		}
+	}
+	.form-input {
+		font-size:33px;
+		&+.form-input {
+			margin-top:10px;
+		}
+	}
+	.form-button {
+		width:100%;
+		font-size:33px;
+		line-height:57px;
+		height:auto;
+		&+.form-button {
+			background-color:#e9cca5;
+			color:#000;
+			margin-top:10px;
+		}
+		&.type-s-dark {
+			line-height:57px;
+			height:57px;
+			font-size:20px;
+			font-size:33px;
+			padding:0;
+			background-color:#48352e;
+			&:hover {
+				background-color:#000;
+			}
+	
+		}
 	}
 }

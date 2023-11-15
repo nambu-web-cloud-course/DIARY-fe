@@ -42,30 +42,34 @@ export default function Login({ setIsLoggedIn }) {
 
 
   return (
-    <div>
-      <Link to="/home"><h1>로고</h1></Link>
-      <br/><br/>
-      <h2>로그인</h2>
+    <div className="page-login">
+      <div className="form-login">
+        <div className="ui-logo">
+          <a class="txt-logo" href="/">D.I.A.R.Y</a>
+        </div>
+        <h2 className="txt-label">로그인</h2>
+        <div className="form-div">
+          <input type="text" placeholder="아이디" value={username} 
+            onChange={(e) => setUsername(e.target.value)} className="form-input"/>
 
-      <input type="text" placeholder="아이디" value={username} 
-        onChange={(e) => setUsername(e.target.value)}/>
-        <br/>
+          <input type="password" placeholder="비밀번호" value={password} 
+            onChange={(e) => setPassword(e.target.value)} className="form-input"/>
 
-      <input type="password" placeholder="비밀번호" value={password} 
-        onChange={(e) => setPassword(e.target.value)}/>
-        <br/>
+  {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+        </div>
+        <button onClick={handleLogin} className="form-button">로그인</button>
+     
+        <Link to="/register" className="form-button">회원가입</Link>
 
-      <button onClick={handleLogin}>로그인</button>
-      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-      
-      <p>
-        <Link to="/register">회원가입</Link> | 
-        <a href="http://localhost:3000/changepw" target="_blank" rel="noreferrer"
-          onClick={() => window.open("http://localhost:3000/changepw", 
-          "_blank", "width=400, height=400")}> 
-        비밀번호 변경
-        </a>
-      </p>
+        <p>
+           
+          {/* <a href="http://localhost:3000/changepw" target="_blank" rel="noreferrer"
+            onClick={() => window.open("http://localhost:3000/changepw", 
+            "_blank", "width=400, height=400")}> 
+          비밀번호 변경
+          </a> */}
+        </p>
+      </div>
     </div>
   );
 }

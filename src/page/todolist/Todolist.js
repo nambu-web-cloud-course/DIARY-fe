@@ -2,21 +2,46 @@
 import {useState, useEffect} from "react"
 import axios from "axios"
 function Todolist() {
+  
     const [toDo,setTodo] = useState("");
     const [toDos,setTodos] = useState([]);
     useEffect(()=> {
-
-        axios.get('https://jsonplaceholder.typicode.com/posts')
+        getTodos();
+      
+      },[])
+    const getTodos = () => {
+        axios.get('http://localhost:8080/todos/')
         .then(res => {
             setTodos(res.data)
         }).catch(error => {
-          console.log(error)
-        }, [])
-      })
-    const onChange = (e) => {
-        setTodo(e.target.value)
-        console.log(toDo)
-    }
+            console.log(error)
+        })
+
+    };
+    const deleteTodos = (todo_no) => {
+        axios
+          .delete(`http://localhost:8080/todos/${todo_no}`)
+          .then(() => {
+            getTodos();
+            console.log(`http://localhost:8080/todos/${todo_no}`)
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      };
+
+    const addTodo = (todo_no) => {
+        axios
+        .post("http://localhost:8080/todos", { toDo })
+        .then(() => {
+        getTodos();
+          setTodo("");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
+
     const onSubmit = (e) => {
         e.preventDefault();
          if(toDo === ""){
@@ -25,7 +50,7 @@ function Todolist() {
         setTodos((currentArray) => [toDo, ...currentArray])
         setTodo("")
     }  
-    console.log(setTodos)
+    
     return (
         <div >
 
@@ -41,8 +66,8 @@ function Todolist() {
                     {/* Form */}
                   
                     <form className="form-type" onSubmit={onSubmit}>
-                        <input type="text" placeholder="Todo 리스트를 추가해주세요 " className="form-input" onChange={onChange} value={toDo}/>
-                        <button class="form-button">추가</button>
+                        <input type="text" placeholder="Todo 리스트를 추가해주세요 " className="form-input" onChange={(e)=>setTodo(e.target.value)} value={toDo}/>
+                        <button class="form-button" onClick={addTodo}>추가</button>
                     </form> 
                     
                     {/* Form */}
@@ -58,17 +83,21 @@ function Todolist() {
                             Todo 리스트를 추가해주세요.
 
                         </div>
+
+                     
                         <ul className="form-list">
-                            {toDos.map((item)=>
-                             <li>
+                            {toDos.data && toDos.data.map((data)=>
+                             <li  key={data.id}>
                                 <input type="checkbox"></input>
                                 <div className="data-list">
-                                {item.title}
+                                {data.todo_content} 
                                 </div>
-                                <a haref="javascript:" class="form-button type-s-dark">삭제</a>
+                                <button type="button" class="form-button type-s-dark" onClick={() => deleteTodos(data.id)}>삭제</button>
+                              
                             </li>
                             )}
-                        </ul> 
+                              
+                        </ul>  
                        
                     </div>
 

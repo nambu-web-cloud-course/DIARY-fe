@@ -171,7 +171,7 @@ button:disabled, input:disabled {
   color: #af7d59;
   font-weight: bold;
 }
-.layout-header .header-menu a:hover {
+.layout-header .header-menu a.is-selected, .layout-header .header-menu a:hover {
   background-color: #af7d59;
   color: #fff;
   transition: all 0.3s;
@@ -455,10 +455,6 @@ button:disabled, input:disabled {
   overflow: hidden;
   font-size: 26px;
 }
-.page-diary .page-title {
-  color: #d95428;
-  border-left-color: #d95428;
-}
 .page-diary .ui-day .data-day {
   text-align: right;
   padding-bottom: 10px;
@@ -515,7 +511,7 @@ button:disabled, input:disabled {
    Page : Calendar
 ***************************************************************************************/
 .page-calendar {
-  padding: 30px;
+  padding: 0 30px;
 }
 .page-calendar .ui-list {
   padding: 30px 0;
@@ -577,6 +573,123 @@ button:disabled, input:disabled {
 .page-gallary {
   padding: 0 30px;
 }
+.page-gallary .ui-top {
+  display: flex;
+  align-items: flex-start;
+}
+.page-gallary .ui-top .form-button {
+  height: 50px;
+  padding: 11px 0;
+  margin-left: 10px;
+}
+.page-gallary .ui-top select {
+  margin-left: auto;
+  font-size: 20px;
+  line-height: 50px;
+  height: 50px;
+  padding: 0 10px;
+}
+.page-gallary .ui-top select option {
+  font-size: 20px;
+}
 .page-gallary .react-calendar__month-view {
   display: none;
+}
+.page-gallary .react-calendar {
+  width: 200px;
+}
+.page-gallary .react-calendar .react-calendar__navigation {
+  padding: 0;
+}
+.page-gallary .react-calendar .react-calendar__navigation button {
+  font-size: 30px;
+}
+.page-gallary .react-calendar .react-calendar__navigation .react-calendar__navigation__label__labelText {
+  font-size: 20px;
+}
+
+/***************************************************************************************
+   Page : Login
+***************************************************************************************/
+.page-login {
+  margin-top: -103px;
+  height: 100vh;
+  background-color: #fbf3ed;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.page-login .form-login {
+  width: 500px;
+  margin: 0 auto;
+}
+@media screen and (max-width: 720px) {
+  .page-login .form-login {
+    padding: 0 50px;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+.page-login .ui-logo {
+  text-align: center;
+}
+.page-login .ui-logo .txt-logo {
+  display: inline-block;
+  margin-bottom: 60px;
+  text-align: center;
+  font-size: 48px;
+  font-weight: bold;
+  line-height: 48px;
+  color: #af7d59;
+}
+.page-login .txt-label {
+  padding-bottom: 30px;
+  text-align: center;
+}
+.page-login .form-div {
+  margin-bottom: 30px;
+}
+.page-login .form-div .form-label {
+  margin-bottom: 10px;
+  font-size: 33px;
+}
+.page-login .form-multi {
+  display: flex;
+}
+.page-login .form-multi input {
+  flex: auto;
+  width: 100%;
+}
+.page-login .form-multi .form-button {
+  width: 100px;
+  margin-left: 10px;
+}
+.page-login .form-input {
+  font-size: 33px;
+}
+.page-login .form-input + .form-input {
+  margin-top: 10px;
+}
+.page-login .form-button {
+  width: 100%;
+  font-size: 33px;
+  line-height: 57px;
+  height: auto;
+}
+.page-login .form-button + .form-button {
+  background-color: #e9cca5;
+  color: #000;
+  margin-top: 10px;
+}
+.page-login .form-button.type-s-dark {
+  line-height: 57px;
+  height: 57px;
+  font-size: 20px;
+  font-size: 33px;
+  padding: 0;
+  background-color: #48352e;
+}
+.page-login .form-button.type-s-dark:hover {
+  background-color: #000;
 }/*# sourceMappingURL=page.css.map */

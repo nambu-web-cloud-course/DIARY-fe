@@ -1,10 +1,9 @@
 const {createProxyMiddleware} = require('http-proxy-middleware')
 module.exports = function(app) {
     app.use(
-        '/users',
+        '/todos',
         createProxyMiddleware({
-            // target:'http://localhost:8080/',
-            target:'https://jsonplaceholder.typicode.com/posts',
+            target:'http://localhost:3000/',
             changeOrigin:true,
         })
     )
