@@ -8,13 +8,11 @@ const Todolist = () => {
   const [error, setError] = useState("");
   const contentRef = useRef();
   const [checkedTodos, setCheckedTodos] = useState([]);
-
-<<<<<<< HEAD
   
-=======
->>>>>>> bf7ba1c727809a73737b8f4e8892a40e70b9d6d1
   useEffect(() => {
     const token = localStorage.getItem("token");
+    // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtaWQiOjEsImlhdCI6MTcwMDExMDg4Mn0.tMskdD90yKKLEjJp94kRr-Bjg88Fol6Z-ZSMMotOZaA';
+
     if (token) {
       axios
         .get(
@@ -24,29 +22,31 @@ const Todolist = () => {
             headers: { Authorization: `Bearer ${token}` },
           }
         )
-        .then((res) => setTodos(res.data))
+        .then((res) => {setTodos(res.data.data); 
+                      console.log(res.data.data)})
         .catch((error) => setError(error.message));
     }
-  }, []);
+  });
 
   const addTodo = async (e) => {
     e.preventDefault();
 
     try {
       const token = localStorage.getItem("token");
+      
       setNewTodo(contentRef.current.value);
       console.log(newTodo);
 
       const response = await axios.post(
         "http://localhost:8080/todos",
-        { todo_content: newTodo, completed: false },
+        { todo_content: newTodo, completed: false , members_no:1},
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
       console.log("서버 응답:", response.data);
 
       if (response.data && response.data.success) {
-        setTodos((prevTodos) => [...prevTodos, response.data]);
+        setTodos([...todos, response.data.data]);
       } else {
         console.error("Invalid response format:", response.data);
       }
@@ -83,6 +83,7 @@ const Todolist = () => {
 
   const deleteTodo = () => {
     const token = localStorage.getItem("token");
+    // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtaWQiOjEsImlhdCI6MTcwMDExMDg4Mn0.tMskdD90yKKLEjJp94kRr-Bjg88Fol6Z-ZSMMotOZaA';
     if (checkedTodos.length === 0) {
       alert("선택된 항목이 없습니다.");
       return;
@@ -170,14 +171,15 @@ const Todolist = () => {
               </div>
             ) : (
               <ul className="form-list">
-                {filteredTodos.map((todos) => (
-                  <li key={todos.members_no}>
-                    {todos.todo_content}
+                {filteredTodos.map((todo) => (
+                  <li key={todo.id}>
+                    
                     <input type="checkbox" 
-                      checked={checkedTodos.includes(todos.todo_content)} 
-                      onChange={() => handleCheckboxChange(todos.todo_content)}
+                      checked={checkedTodos.includes(todo.todo_content)} 
+                      onChange={() => handleCheckboxChange(todo.todo_content)}
                     />
-                    <div className="data-list">{todos.members_no}</div>
+                  {todo.todo_content}
+                    {/* <div className="data-list">{todo.members_no}</div> */}
                     <button
                       className="form-button type-s-dark"
                       onClick={() => deleteTodo()}
