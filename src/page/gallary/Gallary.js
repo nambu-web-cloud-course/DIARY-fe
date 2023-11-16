@@ -18,7 +18,6 @@ function Gallary() {
                         <option>최신순</option>
                         <option>오래된순</option>
                     </select>
-                
                 </div>
 
             </div>
