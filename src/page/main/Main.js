@@ -15,6 +15,7 @@ function Main() {
               <div className="box-info">
                 <a href="javascript:" className="ui-info">
                   <div className="txt-title">Todo List</div>
+                  <i className="img-todolist"></i>
                   <div className="txt-det">
                     오늘 할일을<br />
                     정리해 보세요
@@ -25,6 +26,7 @@ function Main() {
               <div className="box-info">
                 <a href="javascript:" className="ui-info">
                   <div className="txt-title">My Diary</div>
+                  <i className="img-diary"></i>
                   <div className="txt-det">
                     원하는 템플릿을 가지고 <br />다이어리를 꾸며보세요
                   </div>
@@ -34,6 +36,7 @@ function Main() {
               </div>
               <div className="box-info">
                 <a href="javascript:" className="ui-info">
+                  <i className="img-calendar"></i>
                   <div className="txt-title">Calendar</div>
 
                   <div className="txt-det">
@@ -44,6 +47,7 @@ function Main() {
               <div className="box-info">
                 <a href="javascript:" className="ui-info">
                   <div className="txt-title">Gallery</div>
+                  <i className="img-gallary"></i>
                   <div className="txt-det">
 
                     다이어리 사진을 한눈에..
