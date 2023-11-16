@@ -1,10 +1,9 @@
-const {createProxyMiddleware} = require('http-proxy-middleware')
-module.exports = function(app) {
-    app.use(
-        '/todos',
-        createProxyMiddleware({
-            target:'http://localhost:3000/',
-            changeOrigin:true,
-        })
-    )
-}
+// const { createProxyMiddleware } = require("http-proxy-middleware");
+// module.exports = function (app) {
+//   app.use(
+//     createProxyMiddleware("/todos", {
+//       target: "http://localhost:8080/todos",
+//       changeOrigin: true,
+//     })
+//   );
+// };

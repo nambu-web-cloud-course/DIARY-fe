@@ -7,6 +7,7 @@ import Gallary from "../gallary/Gallary";
 import Main from "../main/Main";
 import Register from "../login/Register";
 import Login from "../login/Login";
+import ChangePw from "../login/ChangePw";
 
 function Header() {
 
@@ -19,6 +20,7 @@ function Header() {
         <Route path="/gallary" element={<Gallary/>}></Route>
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/register" element={<Register/>}></Route>
+        <Route path="/changepw" element={<ChangePw/>}></Route>
     </Routes>
 
   );
