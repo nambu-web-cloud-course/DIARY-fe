@@ -4,15 +4,19 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { useCookies } from 'react-cookie';
+//import { useCookies } from 'react-cookie';
 
-export default function Login({ setIsLoggedIn }) {
+export default function Login({ setLoggedIn }) {
   const [member_name, setMembername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   const navigate = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies(['jwtToken']);
+  //const [cookies, setCookie, removeCookie] = useCookies(['jwtToken']);
+
+
+  
+
 
   const handleLogin = async () => {
     try {
@@ -27,16 +31,20 @@ export default function Login({ setIsLoggedIn }) {
         return;
       }
 
-      const response = await axios.post('/sign-in', {
+      // 서버에 로그인 요청 보내기.
+      const response = await axios.post('/sign-up', {
         member_name,
         password,
       });
 
+      // 서버에서 받은 토큰을 로컬 스토리지에 저장
+      localStorage.setItem('accessToken', response.data.accessToken);
+
       if (response.data.token) {
         // JWT 토큰을 쿠키에 저장 (1일 만료)
-        setCookie('jwtToken', response.data.token, { path: '/', maxAge: 86400 });
+        //setCookie('jwtToken', response.data.token, { path: '/', maxAge: 86400 });
 
-        setIsLoggedIn(true);
+        setLoggedIn(true);
         window.alert('로그인되었습니다. 홈으로 이동합니다');
 
         setTimeout(() => {
@@ -48,17 +56,19 @@ export default function Login({ setIsLoggedIn }) {
         setPassword('');
       }
     } catch (error) {
-      console.error('로그인 오류:', error);
+      // 로그인 실패 시 에러 처리를 수행
+      console.error('로그인 실패:', error);
       window.alert('로그인 중 오류가 발생했습니다. 다시 시도해주세요.');
     }
   };
+
 
   // // 로그아웃 시 JWT 토큰 삭제
   // const handleLogout = () => {
   // // 로컬 스토리지에서 JWT 토큰 삭제
   //   localStorage.removeItem('token');
 
-  //   setIsLoggedIn(false);
+  //   setLoggedIn(false);
   //   window.alert('로그아웃하였습니다.');
   //   navigate('http://localhost:3000/login');
   // }
