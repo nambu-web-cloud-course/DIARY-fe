@@ -9,7 +9,10 @@ const Todolist = () => {
   const contentRef = useRef();
   const [checkedTodos, setCheckedTodos] = useState([]);
 
+<<<<<<< HEAD
   
+=======
+>>>>>>> bf7ba1c727809a73737b8f4e8892a40e70b9d6d1
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
