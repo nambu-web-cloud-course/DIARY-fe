@@ -87,33 +87,49 @@ const handleConfirmPasswordChange = (newConfirmPassword) => {
   };
 
   return (
-    <div>
-      <Link to="/home">
-        <h1>로고</h1>
-      </Link>
-      <br /><br />
-      <h2>회원가입</h2>
-      아이디 :{' '}
-      <input type="text" placeholder="아이디" value={username} 
-        onChange={(e) => setUsername(e.target.value)} />
+  
+    <div className="page-login">
+      <div className="form-login">
+      <div className="ui-logo">
+          <a class="txt-logo" href="/">D.I.A.R.Y</a>
+        </div>
       
-      <button onClick={checkUsernameAvailability}>중복확인</button>
-      <br />
-      
-      비밀번호 입력 :{' '}
-      <input type="password" placeholder="비밀번호" value={password} 
-        onChange={(e) => handlePasswordChange(e.target.value)} />
-      <br />
-      
-      비밀번호 입력 확인 :{' '}
-      <input type="password" placeholder="비밀번호 확인" value={confirmPassword} 
-      onChange={(e) => handleConfirmPasswordChange(e.target.value)} />
-      <br /><br />
+        <h2 className="txt-label">회원가입</h2>
+        <div className="form-div">
+          <div className="form-label">
+            아이디 
+          </div>
+          <div className="form-multi">
+            <input type="text" placeholder="아이디" value={username} 
+              onChange={(e) => setUsername(e.target.value)} className="form-input"/>
+            
+            <button onClick={checkUsernameAvailability} className="form-button type-s-dark">중복확인</button>
+          </div>
 
-      <button onClick={handleRegister} disabled={isRegisterButtonDisabled}>
-        회원가입
-      </button>
-      {message && <p>{message}</p>}
-    </div>
+        </div>
+        <div className="form-div">
+          <div className="form-label">
+          비밀번호 입력 {' '}
+          </div>
+          <input type="password" placeholder="비밀번호" value={password} 
+            onChange={(e) => handlePasswordChange(e.target.value)} className="form-input"/>
+        </div>
+
+        <div className="form-div">
+          
+          <div className="form-label">
+          비밀번호 입력 확인 :{' '}
+          </div>
+          <input type="password" placeholder="비밀번호 확인" value={confirmPassword} 
+          onChange={(e) => handleConfirmPasswordChange(e.target.value)}className="form-input"/>
+        </div>
+  
+
+          <button onClick={handleRegister} disabled={isRegisterButtonDisabled} className="form-button">
+            회원가입
+          </button>
+          {message && <p>{message}</p>}
+        </div>
+      </div>
   );
 }

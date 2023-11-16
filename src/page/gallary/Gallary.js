@@ -10,14 +10,15 @@ function Gallary() {
                 <div class="page-title">
                     갤러리
                 </div>
-                <div className="">
+                <div className="ui-top">
                     <CalendarForm></CalendarForm>
                     <a href="javascript:" className="form-button">불러오기</a>
-                    <Select
-                        label="Your favorite library"
-                        placeholder="Pick value"
-                        data={['React', 'Angular', 'Vue', 'Svelte']}
-                    />
+
+                    <select className="component-select">
+                        <option>최신순</option>
+                        <option>오래된순</option>
+                    </select>
+                
                 </div>
 
             </div>
