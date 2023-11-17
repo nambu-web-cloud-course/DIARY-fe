@@ -13,7 +13,7 @@ function Main() {
           <div className="layout-container">
             <div className="page-main">
               <div className="box-info">
-                <a href="javascript:" className="ui-info">
+                <a href="/todolist" className="ui-info">
                   <div className="txt-title">Todo List</div>
                   <i className="img-todolist"></i>
                   <div className="txt-det">
@@ -24,7 +24,7 @@ function Main() {
 
               </div>
               <div className="box-info">
-                <a href="javascript:" className="ui-info">
+                <a href="/diary" className="ui-info">
                   <div className="txt-title">My Diary</div>
                   <i className="img-diary"></i>
                   <div className="txt-det">
@@ -35,7 +35,7 @@ function Main() {
 
               </div>
               <div className="box-info">
-                <a href="javascript:" className="ui-info">
+                <a href="/calendar" className="ui-info">
                   <i className="img-calendar"></i>
                   <div className="txt-title">Calendar</div>
 
@@ -45,7 +45,7 @@ function Main() {
                 </a>
               </div>
               <div className="box-info">
-                <a href="javascript:" className="ui-info">
+                <a href="/gallary" className="ui-info">
                   <div className="txt-title">Gallery</div>
                   <i className="img-gallary"></i>
                   <div className="txt-det">

@@ -8,6 +8,8 @@ import Main from "../main/Main";
 import Register from "../login/Register";
 import Login from "../login/Login";
 import ChangePw from "../login/ChangePw";
+import DiaryDetail from "../diary/DiaryDetail";
+import DiaryEdit from "../diary/DiaryEdit";
 
 function Header() {
 
@@ -21,6 +23,8 @@ function Header() {
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/register" element={<Register/>}></Route>
         <Route path="/changepw" element={<ChangePw/>}></Route>
+        <Route path="/diarydetail" element={<DiaryDetail/>}></Route>
+        <Route path="/mydiaries" element={<DiaryEdit/>}></Route>
     </Routes>
 
   );
