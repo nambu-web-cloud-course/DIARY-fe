@@ -1,13 +1,17 @@
 import React, { useState } from "react";
-import Calendar from 'react-calendar';
+import DatePicker from "react-datepicker";
 
 
 function CalendarForm() {
-    const [value, onChange] = useState(new Date()); // 초기값은 현재 날짜
-
+    const [value, setValue] = useState(new Date());
+ 
   return (
     <div>
-      <Calendar onChange={onChange} value={value} />
+         <DatePicker
+            selected={value}
+            onChange={(date) => setValue(date)}
+            inline
+          />
     </div>
   );
 }

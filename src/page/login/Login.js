@@ -95,36 +95,45 @@ export default function Login() {
   };
 
   return (
-    <form>
-      <div>
-        <Link to="/"><h1>로고</h1></Link>
-        <br/><br/>
-        <h2>로그인</h2>
+      <div className="page-login">
+        <form>
+          <div className="">
+            <div class="form-login">
+              <div class="ui-logo">
+                <a class="txt-logo" href="/">D.I.A.R.Y</a>
+              </div>
+              <h2 class="txt-label">로그인</h2>
+              <div class="form-div">
+                <div class="form-label">아이디</div>
+                <input
+                  type="text"
+                  placeholder="아이디"
+                  value={member_id}
+                  onChange={(e) => setMemberId(e.target.value)}
+                className="form-input"/>
+              </div>
+              <div class="form-div">
+                <div class="form-label">비밀번호</div>
+    
 
-        <input
-          type="text"
-          placeholder="아이디"
-          value={member_id}
-          onChange={(e) => setMemberId(e.target.value)}
-        />
-        <br />
+                <input
+                  type="password"
+                  placeholder="비밀번호"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="form-input"/>
+              </div>
 
-        <input
-          type="password"
-          placeholder="비밀번호"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <br />
+              <button onClick={handleLogin} className="form-button">로그인</button>
 
-        <button onClick={handleLogin}>로그인</button>
-
-        <p>
-          <Link to="/register">회원가입 | </Link> {' '}
-          <button onClick={openChangePwWindow}>비밀번호 변경</button>
-        </p><br/>
-        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+    
+              <Link to="/register" className="form-button">회원가입</Link> {' '}
+              <button onClick={openChangePwWindow}>비밀번호 변경</button>
+       
+              {errorMessage && <p>{errorMessage}</p>}
+            </div>
+          </div>
+      </form>
       </div>
-    </form>
   );
 }

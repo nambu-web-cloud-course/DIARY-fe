@@ -277,39 +277,83 @@ button:disabled, input:disabled {
 /***************************************************************************************
    Calendar
 ***************************************************************************************/
-.react-calendar {
-    border:3px solid #5f5251;
-    background-color:#fdfbea;
-    overflow:hidden;
-    border-radius:10px;
-    .react-calendar__navigation {
-        padding:10px 0;
-        background-color:#f9dadf;
-        text-align:center;
-        button {
-            font-size:30px;
-
-        }
-        .react-calendar__navigation__label__labelText {
-            margin:0 20px;
-
-        }
-    }
-    .react-calendar__month-view__weekdays__weekday {
-        padding:10px 0;
-        text-align:center;
-        font-weight:bold;
-        font-size:30px;
-        background-color:#f3e3db;
-    }
-    .react-calendar__month-view__days__day {
-        height:100px;
-        padding:0 5px;
-        font-size:25px;
-        display:flex;
-    }
+.react-datepicker {
+    border:3px solid #b17b53;
 }
+.react-datepicker__header  {
+    background-color:#f9dbdf;
+}
+.react-datepicker {
+    width:100%;
+}
+.react-datepicker__month-container {
+    width:100%;
+}
+.react-datepicker__current-month {
+    color:#605350;
+}
+.react-datepicker__day-name {
+    width:14%;
+    margin:0;
+}
+.react-datepicker__day, .react-datepicker__time-name {
+    width:14%;
+    margin:0;
+    height:80px;
+    text-align:left;
+    padding:0 10px;
+}
+.react-datepicker__day--003 {
+    position:relative;
+}
+.react-datepicker__day--003:before {
+    display:inline-block;
+    background:url(../../images/icon-calendar.png) no-repeat;
+    background-size:100% 100%;
+    width:20px;
+    height:20px;
+    content:'';
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin:0 0 0 -10px;
 
+}
+.react-datepicker__day--003:after {
+    display:inline-block;
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background-color:green;
+    position:absolute;
+    top:10px;
+    right:10px;
+    content:'';
+}
+.page-gallary .react-datepicker__day-names,
+.page-gallary .react-datepicker__month  {
+    display:none;
+}
+.page-gallary .react-datepicker__current-month {
+    font-size:15px;
+}
+.page-gallary .react-datepicker {
+    width:200px;
+}
+.react-datepicker__navigation {
+    top:8px;
+}
+.react-datepicker__year-read-view--down-arrow, .react-datepicker__month-read-view--down-arrow, .react-datepicker__month-year-read-view--down-arrow, .react-datepicker__navigation-icon::before {
+    border-color:#605350;
+}
+.react-datepicker__day--selected, .react-datepicker__day--in-selecting-range, .react-datepicker__day--in-range, .react-datepicker__month-text--selected, .react-datepicker__month-text--in-selecting-range, .react-datepicker__month-text--in-range, .react-datepicker__quarter-text--selected, .react-datepicker__quarter-text--in-selecting-range, .react-datepicker__quarter-text--in-range, .react-datepicker__year-text--selected, .react-datepicker__year-text--in-selecting-range, .react-datepicker__year-text--in-range {
+    background-color:#e1ec92;
+    color:#5f5352;
+}
+.react-datepicker__day-name, .react-datepicker__day, .react-datepicker__time-name{
+    color:#5f5352;
+
+}
 /***************************************************************************************
    Component
 ***************************************************************************************/
@@ -361,10 +405,9 @@ button:disabled, input:disabled {
     .form-button {
         min-width:100%;
         height:45px;
+        line-height:45px;
         font-size:30px;
-        
     }
-
 }
 .ui-buttons {
     padding:30px 0;
@@ -494,6 +537,8 @@ button:disabled, input:disabled {
             line-height:1em;
             padding:3px 10px;
         }
+
+        
         .data-name {
             display:block;
             white-space:nowrap;
@@ -506,12 +551,24 @@ button:disabled, input:disabled {
         .data-day {
             text-align:right;
             padding-bottom:10px;
+            display:flex;
+            align-items: center;
+            justify-content: flex-end;
         }
-
+        
     }
     .data-day {
         padding:30px 0 0 0;
         font-size:30px;
+        display:flex;
+        align-items: center;
+        .btn-calen {
+            display:inline-block;
+            width:30px;
+            height:30px;
+            background:url(../../images/icon-calendar.png) no-repeat; 
+            background-size:100% 100%;
+        }
     }
     .wrap-box {
         display:flex;
@@ -653,10 +710,18 @@ button:disabled, input:disabled {
     .ui-contents {
         padding:30px 0;
         display:flex;
+        align-items: center;
+        flex-wrap:wrap;
         .area-photo {
-            border-radius:5px;
-            border:1px solid #ccc;
-            height:100px;
+            padding: 10px;
+            width:25%;
+            .img-photo {
+                border:1px solid #ccc;
+                height:150px;
+                border-radius:5px;
+
+            }
+            
         }
 
     }
@@ -689,6 +754,9 @@ button:disabled, input:disabled {
     display:flex;
     flex-direction: column;
     justify-content: center;
+    p {
+       color:#bf3f34; 
+    }
 
     .form-login {
         width:500px;
