@@ -1,8 +1,14 @@
 
-import React, { useState } from "react";
+import React, { useState, ReactDOM } from "react";
 import CalendarForm from "./CalendarForm";
 
 function CalendarPage() {
+    const moment = require('moment');
+    const today = moment();
+    const daySelect = today.format('DD')
+    console.log(daySelect);
+   
+
     return (
         <>
             {/* calendar */}
@@ -13,6 +19,7 @@ function CalendarPage() {
                 <CalendarForm></CalendarForm>
 
                 <div className="ui-list">
+              
                     <div className="txt-label">Todo 리스트</div>
                     <ul className="list-form">
                         <li>
