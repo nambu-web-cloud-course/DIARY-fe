@@ -13,8 +13,8 @@ const Todolist = () => {
   
   useEffect(() => {
     // 저장된 JWT 토큰 가져오기
-    //const token = localStorage.getItem("token");
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtaWQiOjEsImlhdCI6MTcwMDE4ODQzMH0.0oFDWqt-H2M5qHVh9-jvA_J9_pliQ-feoDjtuQ8M-ok';
+    const token = localStorage.getItem("token");
+    //const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtaWQiOjEsImlhdCI6MTcwMDE4ODQzMH0.0oFDWqt-H2M5qHVh9-jvA_J9_pliQ-feoDjtuQ8M-ok';
 
     // 현재 날짜 가져오기 (YYYY-MM-DD 형식)
     const today = new Date().toISOString().split('T')[0];
@@ -26,14 +26,15 @@ const Todolist = () => {
     if (token) {
       axios
         .get(
-          "/todos",
+          "https://diary-be.azurewebsites.net/todos",
           { validateStatus: false },
           {
             headers: { Authorization: `Bearer ${token}` },
           }
         )
-        .then((res) => {setTodos(res.data.data); 
-                      console.log(res.data.data)})
+        .then((res) => {
+          setTodos(res.data.data); 
+          console.log(res.data.data)})
         .catch((error) => setError(error.message));
     }
   },[]);
@@ -43,25 +44,26 @@ const Todolist = () => {
     e.preventDefault();
 
     try {
-      //const token = localStorage.getItem("token");
-      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtaWQiOjEsImlhdCI6MTcwMDE4ODQzMH0.0oFDWqt-H2M5qHVh9-jvA_J9_pliQ-feoDjtuQ8M-ok';
+      const token = localStorage.getItem("token");
+      //const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtaWQiOjEsImlhdCI6MTcwMDE4ODQzMH0.0oFDWqt-H2M5qHVh9-jvA_J9_pliQ-feoDjtuQ8M-ok';
       setNewTodo(contentRef.current.value);
       console.log(newTodo);
 
       const response = await axios.post(
         "https://diary-be.azurewebsites.net/todos",
-        { todo_content: newTodo, members_no:1},
-        //{ todo_content: newTodo, completed: false},
-        { headers: { Authorization: `Bearer ${token}` } 
+        //{ todo_content: newTodo, members_no:1},
+        { todo_content: newTodo},
+        { headers: { Authorization: `Bearer ${token}` },
+          validateStatus: false, 
         }
       );
 
-      console.log("서버 응답 야호!:", response.data);
+      console.log("서버 응답 야호!:", response.data.data);
 
       if (response.data && response.data.success) {
         setTodos([...todos, response.data.data]);
       } else {
-        console.error("응답이 왜....?: ", response.data.data);
+        console.error("왜 등록이 안될까 에러: ", response.data);
       }
       setNewTodo("");
     } catch (error) {
@@ -86,27 +88,33 @@ const Todolist = () => {
 
 
     // 선택된 할일 삭제
-    const deleteTodo = () => {
-      //const token = localStorage.getItem("token");
-      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtaWQiOjEsImlhdCI6MTcwMDE4ODQzMH0.0oFDWqt-H2M5qHVh9-jvA_J9_pliQ-feoDjtuQ8M-ok';
+    const deleteTodo = async () => {
+      const token = localStorage.getItem("token");
+      //const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtaWQiOjEsImlhdCI6MTcwMDE4ODQzMH0.0oFDWqt-H2M5qHVh9-jvA_J9_pliQ-feoDjtuQ8M-ok';
       if (checkedTodos.length === 0) {
         alert("선택된 항목이 없습니다.");
         return;
       }
-      checkedTodos.forEach(async (checkedMemberNo) => {
-        try {
-          await axios.delete(`https://diary-be.azurewebsites.net/todos/${checkedMemberNo}`, {
-            headers: { Authorization: token },
-          });
-          setTodos((prevTodos) =>
-            prevTodos.filter((todos) => todos.members_no !== checkedMemberNo)
-          );
-        } catch (error) {
-          console.error("투두 삭제 오류:", error);
-        }
-      });
-
-      setCheckedTodos([]);
+      try {await Promise.all(
+          checkedTodos.map(async (checkedMemberNo) => {
+            await axios.delete(`https://diary-be.azurewebsites.net/todos/${checkedMemberNo}`, {
+              headers: { Authorization: token },
+            });
+          })
+        );
+    
+        setTodos((prevTodos) =>
+          prevTodos.filter((todo) => 
+          !checkedTodos.includes(todo.id))
+        );
+    
+        setCheckedTodos([]);
+      } catch (error) {
+        console.error("투두 삭제 오류:", error);
+      }
+    
+    
+    setCheckedTodos([]);
   };
 
   // 검색어 변경시 실행되는 함수
@@ -121,27 +129,57 @@ const Todolist = () => {
       )
     : todos;
 
+//   const handleSearchButton = async () => {
+//   try {
+//     const token = localStorage.getItem("token");
+//     const response = await axios.get(
+//       `https://diary-be.azurewebsites.net/todos?date=${selectedDate}&search=${searchTodo}`,
+//       {
+//         headers: { Authorization: `Bearer ${token}` },
+//       }
+//     );
+//     setTodos(response.data.data);
+//   } catch (error) {
+//     console.error("투두 리스트 가져오기 오류:", error);
+//   }
+// };
+
+
 
     // 날짜 변경 핸들러
-    const handleDateChange = (action) => {
-    const currentDateObject = new Date(selectedDate);
-    let newDate;
-
-    if (action === 'prev') {
-      newDate = new Date(currentDateObject);
-      newDate.setDate(currentDateObject.getDate() - 1);
-    } else if (action === 'next') {
-      newDate = new Date(currentDateObject);
-      newDate.setDate(currentDateObject.getDate() + 1);
-    } else {
-      newDate = action;
-    }
-
-  //   const formattedDate = newDate.toISOString().split('T')[0];
-  //   setSelectedDate(formattedDate);
-  //   ChangeDateTodolist(formattedDate, localStorage.getItem('token'));
+    const handleDateChange = async (action) => {
+      const currentDateObject = new Date(selectedDate);
+      let newDate;
   
-};
+      if (action === 'prev') {
+        newDate = new Date(currentDateObject);
+        newDate.setDate(currentDateObject.getDate() - 1);
+      } else if (action === 'next') {
+        newDate = new Date(currentDateObject);
+        newDate.setDate(currentDateObject.getDate() + 1);
+      } else {
+        newDate = action;
+      }
+  
+      const formattedDate = newDate.toISOString().split('T')[0];
+      setSelectedDate(formattedDate);
+  
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get(
+          `https://diary-be.azurewebsites.net/todos?date=${formattedDate}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        setTodos(response.data.data);
+      } catch (error) {
+        console.error("투두 리스트 가져오기 오류:", error);
+      }
+    };
+  
+  //   ChangeDateTodolist(formattedDate, localStorage.getItem('token'));
+
 
 
 
@@ -162,9 +200,9 @@ const Todolist = () => {
         </div>
         <div className="page-contents">
           <div className="data-day">
-            <button onClick={()=>handleDateChange('prev')}>이전 </button>
+            <button onClick={()=>handleDateChange('prev')}><h2>이전</h2> </button>
             {currentDate}
-            <button onClick={()=>handleDateChange('next')}> 다음</button>
+            <button onClick={()=>handleDateChange('next')}><h2>다음</h2></button>
         </div>
 
           {/* Form */}
@@ -196,7 +234,8 @@ const Todolist = () => {
             />
             <button
               className="form-button"
-              onClick={() => setSearchTodo(searchTodo)}
+               onClick={() => setSearchTodo(searchTodo)}
+              //onClick={handleSearchButton}
             >
               검색
             </button>
@@ -217,8 +256,8 @@ const Todolist = () => {
                 {filteredTodos && filteredTodos.map((todo) => (
                   <li key={todo.id}>
                     <input type="checkbox" 
-                      checked={checkedTodos.includes(todo.todo_content)} 
-                      onChange={() => handleCheckboxChange(todo.todo_content)}
+                      checked={checkedTodos.includes(todo.id)} 
+                      onChange={() => handleCheckboxChange(todo.id)}
                     />
                   {todo.todo_content}
                     <div className="data-list">{todo.members_no}</div>

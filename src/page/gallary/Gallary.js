@@ -20,7 +20,7 @@ const Gallery = () => {
       const endDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth() + 1, 0);
 
       // API 서버로 요청을 보낼 때 토큰을 헤더에 추가
-      axios.get('api/gallery/1', {
+      axios.get('https://diary-be.azurewebsites.net/gallery/1', {
         params: {
           userId: 'member_id', 
           startDate: startDate.toISOString(),
@@ -75,7 +75,7 @@ const Gallery = () => {
                     {images.map((image, id) => (
                     <Link key={id} to={`/mydiaries/${image.date}`}>
                         <img 
-                        src={`https://azure-storage-endpoint/${image.containerName}/${image.imageName}`} 
+                        src={`https://diary-be.azurewebsites.net/${image.containerName}/${image.imageName}`} 
                         alt={`Image ${id}`}
                         style={{ width: 'calc(33.333% - 16px)', marginBottom: '16px' }}
                         />
