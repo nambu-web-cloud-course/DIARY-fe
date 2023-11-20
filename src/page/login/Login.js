@@ -45,23 +45,39 @@ export default function Login() {
         }, 1500); // 1.5초 후 메시지 사라짐
     } else {
       axios.post('https://diary-be.azurewebsites.net/members/sign-in', {
+      // axios.post('http://localhost:8080/members/sign-in', {
         member_id: member_id,
         password: password,
       })
       .then(function(obj) {
-        localStorage.setItem("refresh_token", obj.data.token);
+        console.log(obj.data);
+        localStorage.setItem("refresh_token", "Bearer "+obj.data.token);
+        console.log(localStorage.getItem("refresh_token"));
         const config = {
           headers: {
             // 로컬스토리지에 토큰 저장되어 있는지 확인
-            Authorization: `${localStorage.getItem("refresh_token")}`,
+            Authorization: localStorage.getItem("refresh_token"),
+            //Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtaWQiOjIsImlhdCI6MTcwMDQ4Mjc1N30.OQAp0PJEFnloRgLu75WcG4cieWYv8u88evxtBluCDpE',
           },
         };
+        // axios.get('http://localhost:8080/members', config)
         axios.get('https://diary-be.azurewebsites.net/members', config)
           .then(function (response) {
-            console.log("refresh_token 값 : " + response.data.token);
-            alert(member_id + "님 환영합니다. 홈으로 이동합니다");
-            //window.location.href = "/";//로그인 후 홈으로 이동
-            navigate('/');
+            console.log(response.data);
+
+            if(response.data.success && response.data.data.member_name) {
+              localStorage.setItem("member_id", response.data.data.member_id );
+              localStorage.setItem("member_name", response.data.data.member_name );
+              // alert(localStorage.getItem("member_id"));
+              alert(response.data.data.member_name + "님 환영합니다. 홈으로 이동합니다");
+              //window.location.href = "/";//로그인 후 홈으로 이동
+              navigate('/');
+            } else {
+              alert('로그인에 실패하였습니다. 다시 로그인해주세요')
+              setMemberId('');
+              setPassword('');
+            }
+              
           })
           .catch(function (error) {
             console.log("로그인에 실패하였습니다. " + error);
