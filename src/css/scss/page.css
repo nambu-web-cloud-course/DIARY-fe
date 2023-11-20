@@ -742,7 +742,12 @@ button:disabled, input:disabled {
 .page-gallary .react-calendar .react-calendar__navigation .react-calendar__navigation__label__labelText {
   font-size: 20px;
 }
-
+.highlight {
+  border:1px solid red !important;
+}
+.highlight2 {
+  border:1px solid blue !important;
+}
 /***************************************************************************************
    Page : Login
 ***************************************************************************************/

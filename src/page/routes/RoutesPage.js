@@ -10,6 +10,7 @@ import Login from "../login/Login";
 import ChangePw from "../login/ChangePw";
 import DiaryDetail from "../diary/DiaryDetail";
 import DiaryEdit from "../diary/DiaryEdit";
+import DiaryEdit2 from "../diary/DiaryEdit2";
 
 function Header() {
 
@@ -25,6 +26,7 @@ function Header() {
         <Route path="/changepw" element={<ChangePw/>}></Route>
         <Route path="/diarydetail" element={<DiaryDetail/>}></Route>
         <Route path="/mydiaries" element={<DiaryEdit/>}></Route>
+        <Route path="/mydiaries2" element={<DiaryEdit2/>}></Route>
     </Routes>
 
   );

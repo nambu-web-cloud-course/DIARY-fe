@@ -3,11 +3,7 @@ import React, { useState, ReactDOM } from "react";
 import CalendarForm from "./CalendarForm";
 
 function CalendarPage() {
-    const moment = require('moment');
-    const today = moment();
-    const daySelect = today.format('DD')
-    console.log(daySelect);
-   
+
 
     return (
         <>
