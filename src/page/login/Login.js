@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 export default function Login() {
-  const [member_id, setMemberId] = useState('');
+  const [memberId, setMemberId] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -16,7 +16,7 @@ export default function Login() {
 
     e.preventDefault();
 
-    if(member_id === "" && password === "") {
+    if(memberId === "" && password === "") {
       setErrorMessage("아이디와 비밀번호가 모두 입력되지 않았습니다.");
       //alert("아이디와 비밀번호가 모두 입력되지 않았습니다.");
       setTimeout(() => {
@@ -34,7 +34,7 @@ export default function Login() {
           setMemberId('');
           setPassword('');
       }, 1500); // 1.5초 후 메시지 사라짐
-    } else if (member_id === "") {
+    } else if (memberId === "") {
         setErrorMessage("아이디가 입력되지 않았습니다.")
         //alert("아이디가 입력되지 않았습니다.")
         setTimeout(() => {
@@ -45,7 +45,7 @@ export default function Login() {
         }, 1500); // 1.5초 후 메시지 사라짐
     } else {
       axios.post('https://diary-be.azurewebsites.net/members/sign-in', {
-        member_id: member_id,
+        member_id: memberId,
         password: password,
       })
       .then(function(obj) {
@@ -56,11 +56,11 @@ export default function Login() {
             Authorization: `${localStorage.getItem("refresh_token")}`,
           },
         };
-        axios.get('https://diary-be.azurewebsites.net/members', config)
+        axios.get('https://diary-be.azurewebsites.net/members/', config)
           .then(function (response) {
             console.log("refresh_token 값 : " + response.data.token);
-            alert(member_id + "님 환영합니다. 홈으로 이동합니다");
-            //window.location.href = "/";//로그인 후 홈으로 이동
+            alert(memberId + "님 환영합니다. 홈으로 이동합니다");
+            //window.location.replace = "/";//로그인 후 홈으로 이동
             navigate('/');
           })
           .catch(function (error) {
@@ -108,7 +108,7 @@ export default function Login() {
                 <input
                   type="text"
                   placeholder="아이디"
-                  value={member_id}
+                  value={memberId}
                   onChange={(e) => setMemberId(e.target.value)}
                 className="form-input"/>
               </div>

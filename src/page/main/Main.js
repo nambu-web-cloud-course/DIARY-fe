@@ -1,11 +1,20 @@
 
 import { BrowserRouter ,Routes, Route } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 // import Todolist from "../TodoList/TodoList";
 
 
 function Main() {
+
+  //  useEffect(() => {
+  //    if (localStorage.getItem('token') === null) {
+  //       alert('로그인 후 이용해주세요. 로그인화면으로 이동합니다');
+  //      window.location.replace('http://localhost:3000/sign-in')
+  //    }
+  //   }, []);
+
+
     return (
         <div className="wrap-page">
 
