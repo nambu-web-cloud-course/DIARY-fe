@@ -1,78 +1,58 @@
-import {useState} from 'react';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import ReactHtmlParser from 'react-html-parser';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-
-function DiaryEdit2() {
-    // const submitReview = ()=>{
-    //     axios.get('https://diary-be.azurewebsites.net/mydiaries/4')
-    //     .then(res => {
-    //         movieContent(res.data)
-    //     }).catch(error => {
-    //         console.log(error)
-    //     })
-
-    //   };
-
-  const [movieContent, setMovieContent] = useState({
-    title: '',
-    content: ''
+const DiaryEdit2 = () => {
+  const token = localStorage.getItem("token");
+  const [myDiary,setMyDiary] = useState([]);
+  const [postData, setPostData] = useState({
+    // 이곳에 전송하고자 하는 데이터를 초기화합니다.
+    diary_title: 'value1',
+    diary_content: 'value2',
   });
-  const [viewContent, setViewContent] = useState([]);
-  const getValue = e => {
-    const { name, value } = e.target;
-      console.log(name, value);
+  useEffect(() => {
+    getDiary();
+  },[]);
+  const getDiary = () => {
+    axios.get(
+      'https://diary-be.azurewebsites.net/mydiaries/',
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+    .then(res => {
+      console.log(res.data);
+      
+    }).catch(error => {
+        console.log(error)
+    })
+}; 
+
+  const handlePostRequest = async () => {
+    try {
+      const response = await axios.post('https://diary-be.azurewebsites.net/mydiaries/', {
+        diary_content:'test',
+        diary_title:'test'
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+        
+      },
+      postData).then(res => {
+        console.log('POST 요청 성공:', res.data);
+        
+      })
+      // 성공적으로 요청이 완료된 경우 원하는 작업을 수행합니다.
+    } catch (error) {
+      console.error('POST 요청 실패:', error);
+      // 요청이 실패한 경우 에러 처리를 수행합니다.
+    }
   };
+
   return (
-    <div className="App">
-        <div>
-            {viewContent.map(element => 
-                <div>
-                    <h2>{element.title}</h2>
-                    <div>
-                    {ReactHtmlParser(element.content)}
-                    </div>
-                </div>
-            )}
-        </div>
-      <input className="title-input"
-        type='text'
-          placeholder='제목'
-          onChange={getValue}
-          name='title'
-      />
-      <CKEditor
-        editor={ ClassicEditor }
-        data="<p>Hello from CKEditor&nbsp;5!</p>"
-        onReady={ editor => {
-            // You can store the "editor" and use when it is needed.
-            console.log( 'Editor is ready to use!', editor );
-        } }
-        onChange={(event, editor) => {
-          const data = editor.getData();
-          console.log({ event, editor, data });
-          setMovieContent({
-            ...movieContent,
-            content: data
-          })
-          console.log(movieContent);
-        }}
-        onBlur={ ( event, editor ) => {
-            console.log( 'Blur.', editor );
-        } }
-        onFocus={ ( event, editor ) => {
-            console.log( 'Focus.', editor );
-        } }
-    />
-      {/* <button onClick={submitReview}>입력</button> */}
-      <button type="button" onClick={()=> {
-        setViewContent(viewContent.concat({...movieContent}))
-      }}>입력</button>
+    <div>
+      <h1>POST 요청 보내기</h1>
+      <button onClick={handlePostRequest}>POST 요청 보내기</button>
     </div>
   );
-}
+};
 
 export default DiaryEdit2;
-

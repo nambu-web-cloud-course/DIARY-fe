@@ -47,17 +47,20 @@ function Header() {
   //   }
   // };
 
+  const refreshPage=()=>{
+    window.location.reload();
+} 
+  const handleLogout = (event) => {
+    refreshPage();
 
-  const handleLogout = () => {
+    isLogin = false;
+    member_id = "";
+    member_name = "";
 
     alert("Logout Button Cliecked!!");
     localStorage.setItem("refresh_token", "");
     localStorage.setItem("member_id", "" );
     localStorage.setItem("member_name", "");
-
-    isLogin = false;
-    member_id = "";
-    member_name = "";
 
     // login.isLogin = false;
     // login.member_id = "";
@@ -88,7 +91,7 @@ function Header() {
 
                 {
                   isLogin === true
-                  ? <button onClick={handleLogout} className="link-login">로그아웃</button>
+                  ? <Link to="/" onClick={handleLogout} className="link-login">로그아웃</Link>
                   : <Link to="/login" className="link-login">로그인</Link>
                 }
                 

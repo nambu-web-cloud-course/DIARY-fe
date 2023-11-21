@@ -35,6 +35,7 @@ const Todolist = () => {
         )
         .then((res) => {
           setTodos(res.data.data); 
+          console.log(res.data.data)
         })
         .catch((error) => {
           console.log("심각한 에러 발생 : ",error);

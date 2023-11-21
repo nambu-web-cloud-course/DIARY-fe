@@ -11,7 +11,6 @@ export default function Login() {
   const [errorMessage, setErrorMessage] = useState('');
 
   const navigate = useNavigate();
-
   const handleLogin = async(e) => {
 
     e.preventDefault();
@@ -70,7 +69,7 @@ export default function Login() {
               localStorage.setItem("member_name", response.data.data.member_name );
               // alert(localStorage.getItem("member_id"));
               alert(response.data.data.member_name + "님 환영합니다. 홈으로 이동합니다");
-              //window.location.href = "/";//로그인 후 홈으로 이동
+              window.location.href = "/";//로그인 후 홈으로 이동
               navigate('/');
             } else {
               alert('로그인에 실패하였습니다. 다시 로그인해주세요')
@@ -92,6 +91,7 @@ export default function Login() {
         //alert("아이디 또는 비밀번호가 일치하지 않습니다.")
       })
     }
+
   };
     
 

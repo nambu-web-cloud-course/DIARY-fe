@@ -26,37 +26,29 @@ function CalendarForm() {
         })
       .then(res => {
         setTodos(res.data)
-
       }).catch(error => {
           console.log(error)
       })
   }; 
+console.log(toDos.data);
+  
+const formattedDates = toDos.data && toDos.data.map((data) => moment(data.created_at).format('DD-MM-YYYY'));
 
-  console.log('toDos',toDos);
-
-  const aa = toDos.data && toDos.data.map((data)=>{
-    const tempdate = moment(data).format('DD-MM-YYYY')
-    return tempdate
-  }); 
+  
   return (
  
     <div>
         <Calendar
- 
           tileClassName={({ date, view }) => {
-            
-            if(aa?.find(x=>x===moment(date).format("DD-MM-YYYY"))){
+            if(formattedDates?.find(x=>x===moment(date).format("DD-MM-YYYY"))){
               return  'highlight'
               }
-          
           }}
           tileDisabled={({ date }) => date.getDay() === 0}
-
           minDate={
             new Date()
           }
         />
-
     </div>
    
   );
