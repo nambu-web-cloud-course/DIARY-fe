@@ -30,7 +30,7 @@ export default function PasswordReset() {
   // 비밀번호 변경 처리 함수
   const handleChangePassword = async () => {
     try {
-      const response = await axios.get(`https://diary-be.azurewebsites.net/members/${username}`);
+      const response = await axios.get(`https://diary-be.azurewebsites.net/members/sign-in/${username}`);
 
       // 아이디가 존재하면 비밀번호 변경 로직 실행
       if (response.data.exists) {
@@ -42,9 +42,12 @@ export default function PasswordReset() {
             },
           };
 
-          const changePasswordResponse = await axios.post('https://diary-be.azurewebsites.net/members', {
-            newPassword,
-          }, config);
+          // 아이디가 존재할 경우, 해당 사용자의 비밀번호 변경 요청을 보냄
+          const changePasswordResponse = await axios.post(
+            `https://diary-be.azurewebsites.net/members/sign-in/${username}/password`,
+            { newPassword },
+            config
+          );
 
           if (changePasswordResponse.data.success) {
             // 비밀번호 변경에 성공한 경우 알림창 표시 및 로그인 페이지로 이동
@@ -73,6 +76,7 @@ export default function PasswordReset() {
       setConfirmNewPassword('');
     }
   };
+
 
   return (
     <div>

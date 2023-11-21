@@ -54,7 +54,7 @@ function Main() {
                 </a>
               </div>
               <div className="box-info">
-                <a href="/gallary" className="ui-info">
+                <a href="/gallery" className="ui-info">
                   <div className="txt-title">Gallery</div>
                   <i className="img-gallary"></i>
                   <div className="txt-det">

@@ -6,36 +6,43 @@ const Todolist = () => {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState("");
   const [searchTodo, setSearchTodo] = useState("");
-  const [error, setError] = useState("");
+  //const [error, setError] = useState("");
   const contentRef = useRef();
   const [checkedTodos, setCheckedTodos] = useState([]);
   const [currentDate, setCurrentDate] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
 
+  const setError = '';
+
   useEffect(() => {
     // 저장된 JWT 토큰 가져오기
-    //const token = localStorage.getItem("token");
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtaWQiOjEsImlhdCI6MTcwMDQ2Nzk2NH0.aq62dcgSt-3mj4YLlsCGw8E7L2kUWn2hQhIiC_XEML0';
+    const token = localStorage.getItem("token");
+    //const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtaWQiOjEsImlhdCI6MTcwMDQ2Nzk2NH0.aq62dcgSt-3mj4YLlsCGw8E7L2kUWn2hQhIiC_XEML0';
 
-    // 현재 날짜 가져오기 (YYYY-MM-DD 형식)
-    const today = new Date().toISOString().split("T")[0];
-    //setCurrentDate(today);
+    // 현재 날짜 가져오기 
+    const today = new Date().toLocaleDateString('ko-KR').split("T")[0];
+    setCurrentDate(today);
 
     // 초기 선택된 날짜 설정
     setSelectedDate(today);
 
     if (token) {
+
       axios
         .get(
-          "https://diary-be.azurewebsites.net/todos",
+          `https://diary-be.azurewebsites.net/todos/${today}`,
+          //"https://diary-be.azurewebsites.net/todos",
           // "http://localhost:8080/todos",
+          
           { validateStatus: false },
           {
             headers: { Authorization: `Bearer ${token}` },
+            //headers: { Authorization: `Bearer ${token}` , 'Cache-Control':'no-cache',},//캐시 사용 방지
+            
           }
         )
         .then((res) => {
-          setTodos(res.data.data);
+          // setTodos(res.data.data);
           console.log(res.data.data);
         })
         .catch((error) => {
@@ -43,16 +50,19 @@ const Todolist = () => {
           setError(error.message);
         });
     }
-  }, []);
+  });
 
   const addTodo = async (e) => {
     e.preventDefault();
 
     try {
-      //const token = localStorage.getItem("token");
-      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtaWQiOjEsImlhdCI6MTcwMDQ2Nzk2NH0.aq62dcgSt-3mj4YLlsCGw8E7L2kUWn2hQhIiC_XEML0';
-      setNewTodo(contentRef.current.value);
-      console.log(newTodo);
+      const token = localStorage.getItem("token");
+      //const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtaWQiOjEsImlhdCI6MTcwMDQ2Nzk2NH0.aq62dcgSt-3mj4YLlsCGw8E7L2kUWn2hQhIiC_XEML0';
+      
+      // setNewTodo(contentRef.current.value);
+      // console.log(newTodo);
+      const newTodoValue = contentRef.current.value;
+      console.log(newTodoValue);
 
       if (!newTodo.trim()) {
         alert("할일을 작성해주세요.");
@@ -76,16 +86,19 @@ const Todolist = () => {
         "https://diary-be.azurewebsites.net/todos",
         // "http://localhost:8080/todos",
         //{ todo_content: newTodo, members_no:members_no},
-        { todo_content: newTodo, members_no:1},
+        { todo_content: newTodo},
+        //{ todo_content: newTodo, members_no:1},
         {
           headers: { Authorization: `Bearer ${token}` },
           //validateStatus: false,
         }
       );
-
+        console.log(token);
       if (response.data && response.data.success) {
         setTodos([...todos, response.data.data]);
         console.log("서버 응답 야호!:", response.data.data);
+        
+
       } else {
         console.error("왜 등록이 안될까 에러: ", response.data.data);
 
@@ -121,9 +134,9 @@ const Todolist = () => {
   };
 
   // 선택된 할일 삭제
-  const deleteTodo = async () => {
-    //const token = localStorage.getItem("token");
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtaWQiOjEsImlhdCI6MTcwMDQ2Nzk2NH0.aq62dcgSt-3mj4YLlsCGw8E7L2kUWn2hQhIiC_XEML0';
+  const deleteTodo = async (todo) => {
+    const token = localStorage.getItem("token");
+    //const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtaWQiOjEsImlhdCI6MTcwMDQ2Nzk2NH0.aq62dcgSt-3mj4YLlsCGw8E7L2kUWn2hQhIiC_XEML0';
     if (checkedTodos.length === 0) {
       alert("선택된 항목이 없습니다.");
       return;
@@ -180,8 +193,11 @@ const Todolist = () => {
   //   }
   // };
 
+
+
   // 날짜 변경 핸들러
   const handleDateChange = async (action) => {
+    
     const currentDate = new Date(selectedDate);
     let newDate;
 
@@ -195,7 +211,7 @@ const Todolist = () => {
       newDate = action;
     }
 
-    const formattedDate = newDate.toISOString().split("T")[0];
+    const formattedDate = newDate.toLocaleDateString('ko-KR').split("T")[0];
     setSelectedDate(formattedDate);
 
     try {
@@ -213,7 +229,7 @@ const Todolist = () => {
     }
   };
 
-  //   ChangeDateTodolist(formattedDate, localStorage.getItem('token'));
+     //ChangeDateTodolist(formattedDate, localStorage.getItem('token'));
 
   return (
     <div>
@@ -234,7 +250,7 @@ const Todolist = () => {
             <button onClick={() => handleDateChange("prev")}>
               <h2>이전</h2>{" "}
             </button>
-            <span>{currentDate}</span>
+            <span>{selectedDate}</span>{" "}
             <button onClick={() => handleDateChange("next")}>
               <h2>다음</h2>
             </button>
@@ -298,14 +314,19 @@ const Todolist = () => {
                         checked={checkedTodos.includes(todo.id)}
                         onChange={() => handleCheckboxChange(todo)}
                       />
+                      {/* <input box newTodo={newTodo} setNewTodo={setNewTodo}/> */}
                       {todo.todo_content}
-                      <div className="data-list">{todo.members_no}</div>
+                     
+
+                    <div className="data-list">
+                    
                       <button
                         className="form-button type-s-dark"
-                        onClick={() => deleteTodo()}
+                        onClick={() => deleteTodo(todo)}
                       >
                         삭제
                       </button>
+                    </div>
                     </li>
                   ))}
               </ul>
