@@ -277,66 +277,8 @@ button:disabled, input:disabled {
 /***************************************************************************************
    Calendar
 ***************************************************************************************/
-.react-datepicker {
-  border: 3px solid #b17b53;
-}
-
-.react-datepicker__header {
-  background-color: #f9dbdf;
-}
-
-.react-datepicker {
-  width: 100%;
-}
-
-.react-datepicker__month-container {
-  width: 100%;
-}
-
-.react-datepicker__current-month {
-  color: #605350;
-}
-
-.react-datepicker__day-name {
-  width: 14%;
-  margin: 0;
-}
-
-.react-datepicker__day, .react-datepicker__time-name {
-  width: 14%;
-  margin: 0;
-  height: 80px;
-  text-align: left;
-  padding: 0 10px;
-}
-
-.react-datepicker__day--003 {
-  position: relative;
-}
-
-.react-datepicker__day--003:before {
-  display: inline-block;
-  background: url(../../images/icon-calendar.png) no-repeat;
-  background-size: 100% 100%;
-  width: 20px;
-  height: 20px;
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: 0 0 0 -10px;
-}
-
-.react-datepicker__day--003:after {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: green;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  content: "";
+.react-calendar__tile.highlight {
+  border: 1px solid red;
 }
 
 .page-gallary .react-datepicker__day-names,
@@ -542,6 +484,12 @@ button:disabled, input:disabled {
   position: relative;
   height: 100%;
 }
+.page-diary .Editor .title-wrapper {
+  margin-bottom: 10px;
+}
+.page-diary .Editor .ck.ck-editor__main > .ck-editor__editable {
+  height: 900px !important;
+}
 .page-diary .top-diary {
   display: flex;
 }
@@ -742,12 +690,7 @@ button:disabled, input:disabled {
 .page-gallary .react-calendar .react-calendar__navigation .react-calendar__navigation__label__labelText {
   font-size: 20px;
 }
-.highlight {
-  border:1px solid red !important;
-}
-.highlight2 {
-  border:1px solid blue !important;
-}
+
 /***************************************************************************************
    Page : Login
 ***************************************************************************************/
@@ -835,4 +778,26 @@ button:disabled, input:disabled {
 }
 .page-login .form-button.type-s-dark:hover {
   background-color: #000;
+}
+
+.ReactModal__Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#cate-modal {
+  width: 500px;
+  height: 500px;
+  top: 50% !important;
+  left: 50% !important;
+  margin: -250px 0 0 -250px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 30px;
+  right: 30px;
 }/*# sourceMappingURL=page.css.map */
