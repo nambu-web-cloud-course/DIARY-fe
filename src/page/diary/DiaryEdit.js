@@ -17,9 +17,6 @@ function DiaryEdit() {
              
               <div className="top-diary">
                   <span className="data-category">[카테고리 선택] </span>
-                  <span className="data-name">
-                  일기 제목일기 제목일기 제목일기 제목일기 제목일기 제목일기 제목
-                  </span>
               </div>
               <div className="ui-day">
                   <div className="data-day">2023.11.10(금)
