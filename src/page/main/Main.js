@@ -33,7 +33,7 @@ function Main() {
 
               </div>
               <div className="box-info">
-                <a href="/diary" className="ui-info">
+                <a href="/diaryhome" className="ui-info">
                   <div className="txt-title">My Diary</div>
                   <i className="img-diary"></i>
                   <div className="txt-det">

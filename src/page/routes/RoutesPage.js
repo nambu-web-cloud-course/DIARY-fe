@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Todolist from "../todolist/Todolist";
 import Diary from "../diary/Diary";
@@ -18,15 +17,15 @@ function Header() {
     <Routes>
         <Route path="/" element={<Main/>}></Route>
         <Route path="/todolist" element={<Todolist/>}></Route>
-        <Route path="/diary" element={<Diary/>}></Route>
+        <Route path="/diaryhome" element={<Diary/>}></Route>
         <Route path="/calendar" element={<CalendarPage/>}></Route>
         <Route path="/gallery" element={<Gallery/>}></Route>
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/register" element={<Register/>}></Route>
         <Route path="/changepw" element={<ChangePw/>}></Route>
         <Route path="/diarydetail" element={<DiaryDetail/>}></Route>
-        <Route path="/mydiaries" element={<DiaryEdit/>}></Route>
-        <Route path="/mydiaries2" element={<DiaryEdit2/>}></Route>
+        <Route path="/diaryedit" element={<DiaryEdit/>}></Route>
+        <Route path="/diaryedit2" element={<DiaryEdit2/>}></Route>
     </Routes>
 
   );

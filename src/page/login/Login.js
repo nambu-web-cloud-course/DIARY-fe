@@ -1,5 +1,4 @@
 //로그인페이지
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -11,11 +10,14 @@ export default function Login() {
   const [errorMessage, setErrorMessage] = useState('');
 
   const navigate = useNavigate();
+//   const refreshPage=()=>{
+//     window.location.reload();
+// } 
 
   const handleLogin = async(e) => {
-
+    // refreshPage();
     e.preventDefault();
-
+    
     if(member_id === "" && password === "") {
       setErrorMessage("아이디와 비밀번호가 모두 입력되지 않았습니다.");
       //alert("아이디와 비밀번호가 모두 입력되지 않았습니다.");
@@ -62,6 +64,7 @@ export default function Login() {
         };
         // axios.get('http://localhost:8080/members', config)
         console.log('axios.get');
+
         axios.get('https://diary-be.azurewebsites.net/members/memberinfo', config)
           .then(function (response) {
             console.log(response.data);
@@ -73,6 +76,8 @@ export default function Login() {
               alert(response.data.data.member_name + "님 환영합니다. 홈으로 이동합니다");
               //window.location.href = "/";//로그인 후 홈으로 이동
               navigate('/');
+              window.location.reload();
+
             } else {
               alert('로그인에 실패하였습니다. 다시 로그인해주세요')
               setMemberId('');
@@ -141,9 +146,7 @@ export default function Login() {
                   className="form-input"/>
               </div>
 
-              <button onClick={handleLogin} className="form-button">로그인</button>
-
-    
+             <Link onClick={handleLogin} className="form-button">로그인</Link> {' '}
               <Link to="/register" className="form-button">회원가입</Link> {' '}
               <button onClick={openChangePwWindow}>비밀번호 변경</button>
        

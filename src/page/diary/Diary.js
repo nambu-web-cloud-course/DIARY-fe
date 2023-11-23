@@ -1,9 +1,31 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import Modal from 'react-modal';
 
 
 function Diary() {
+    let subtitle;
+    
+    const [modalIsOpen, setIsOpen] = React.useState(false);
+    
+    const [modalIsOpen2, setIsOpen2] = React.useState(false);
+  
+    function openModal() {
+      setIsOpen(true);
+    }
+    function openModal2() {
+        setIsOpen2(true);
+    }
+  
+    function afterOpenModal() {
+      // references are now sync'd and can be accessed.
+      subtitle.style.color = '#f00';
+    }
+  
+    function closeModal() {
+      setIsOpen(false);
+      setIsOpen2(false);
+    }
     return (
         <>
         {/* diary */}
@@ -12,6 +34,47 @@ function Diary() {
             <div class="page-title">
                 내가 쓴 일기
             </div>
+            <div>
+            <div>
+                <button onClick={openModal}>배경</button>
+                <Modal
+                    isOpen={modalIsOpen}
+                    onAfterOpen={afterOpenModal}
+                    onRequestClose={closeModal}
+                    contentLabel="Example Modal"
+                >
+                    <h2 ref={(_subtitle) => (subtitle = _subtitle)}></h2>
+                    <button onClick={closeModal} classNmae="modal-close" style={{
+                        position:'absolute',
+                        top:'20px',
+                        right:'20px'
+                    }}>close</button>
+                    배경 팝업 내용
+                   
+                </Modal>
+             </div>
+
+            <div className="">
+                <button onClick={openModal2}>카테고리</button>
+                <Modal
+                    id="cate-modal"
+                    isOpen={modalIsOpen2}
+                    onAfterOpen={afterOpenModal}
+                    onRequestClose={closeModal}
+                    contentLabel="Example Modal"
+                >
+                    <h2 ref={(_subtitle) => (subtitle = _subtitle)}></h2>
+                    <button onClick={closeModal} classNmae="modal-close" style={{
+                        position:'absolute',
+                        top:'20px',
+                        right:'20px'
+                    }}>close</button>
+                    카테고리 팝업 내용
+                   
+                </Modal>
+             </div>
+            </div>
+ 
             <div className="wrap-box">
                 {/* Box */}
                 <div className="box-diary">
@@ -47,7 +110,7 @@ function Diary() {
 
 
             <div className="fix-buttons">
-                <Link to="/mydiaries" className="form-button">새 일기 쓰기</Link>
+                <Link to="/diaryedit" className="form-button">새 일기 쓰기</Link>
                 {/* <a href="/mydiaries" className="form-button">새 일기 쓰기</a> */}
             </div>
         </div>

@@ -830,4 +830,26 @@ button:disabled, input:disabled {
 }
 .page-login .form-button.type-s-dark:hover {
   background-color: #000;
+}
+
+.ReactModal__Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#cate-modal {
+  width: 500px;
+  height: 500px;
+  top: 50% !important;
+  left: 50% !important;
+  margin: -250px 0 0 -250px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 30px;
+  right: 30px;
 }/*# sourceMappingURL=page.css.map */

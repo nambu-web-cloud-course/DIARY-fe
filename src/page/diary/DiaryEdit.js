@@ -1,38 +1,36 @@
 
+// export default DiaryEdit;
 import React, { useState } from "react";
 import EditorForm from "../editor/EditorForm";
+import AddFile from "../editor/AddFile"
+import { Link } from 'react-router-dom';
 
 function DiaryEdit() {
     return (
         <div className="wrap-page">
-         
+           <div className="page-diary">
+             <div><Link to="/diaryhome" className="btn-back">Home</Link> {' '}</div> 
+              {/* <Link to="/diaryhome" className="form-button">뒤로가기</Link> {' '} */}
 
-            {/* TodoList */}
-            <div className="page-diary">
-                <div class="page-title">
-                    내가 쓴 일기
-                </div>
-                {/* Top Diary */}
-                <div className="top-diary">
-                    <span className="data-category">[카테고리명] </span>
-                    
-                    <span className="data-name">
-                    일기 제목일기 제목일기 제목일기 제목일기 제목일기 제목일기 제목
-                    </span>
-                </div>
-                <div className="ui-day">
-                    <div className="data-day">2023.11.10(금) <a href="javascript:" className="btn-calen">달력아이콘</a></div>
-                </div>
+              {/* Top Diary */}
+              <div class="page-title">새 일기 쓰기</div>
+             
+              <div className="top-diary">
+                  <span className="data-category">[카테고리 선택] </span>
+              </div>
+              <div className="ui-day">
+                  <div className="data-day">2023.11.10(금)
+                    <a href="javascript:" className="btn-calen"></a></div>
+              </div>
 
                 {/* Editor */}
                   <EditorForm></EditorForm>
+                  <AddFile></AddFile>
+                 
 
-                <div className="ui-buttons">
-                    <a href="javascript:" className="form-button">저장</a>
-                    <a href="javascript:" className="form-button type-dark">삭제</a>
-                </div>
+               
             </div>
-         
+           
       </div>
     )
 }
