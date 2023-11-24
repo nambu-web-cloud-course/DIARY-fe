@@ -333,16 +333,6 @@ button:disabled, input:disabled {
 
 .edit-detail {
   position: relative;
-  background-color: #fff;
-}
-.edit-detail:after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  content: "";
-  z-index: 50;
 }
 .edit-detail .p-editor-toolbar {
   display: none;
@@ -542,7 +532,7 @@ button:disabled, input:disabled {
   flex-direction: column;
   align-items: center;
   width: 50%;
-  padding: 0 10px;
+  padding: 10px;
 }
 .page-diary .box-diary .box-title {
   width: 100%;

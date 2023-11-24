@@ -1,58 +1,66 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import axios from 'axios';
 
+const Diary = () => {
+    const token = localStorage.getItem("token");
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [filteredDiaries, setFilteredDiaries] = useState([]);
 
+  useEffect(() => {
+    fetchData();
+  }, [selectedDate]);
 
-function Diary() {
-    return (
-        <>
-        {/* diary */}
-        <div className="page-diary">
-            <div className="data-day">2023.11.10(금) <a href="/calendar" className="btn-calen">달력아이콘</a></div>
-            <div class="page-title">
-                내가 쓴 일기
-            </div>
-            <div className="wrap-box">
-                {/* Box */}
-                <div className="box-diary">
-                    <div className="box-title">
-                        <span className="data-category">[카테고리명] </span>
-                        
-                        <span className="data-name">
-                        일기 제목일기 제목일기 제목일기 제목일기 제목일기 제목일기 제목
-                        </span>
-                    </div>
-                    <div className="data-image">
-                        내 일기 1
-                        커버 이미지
-                    </div>
-                    
-                </div>
-                    {/* Box */}
-                    <div className="box-diary">
-                    <div className="box-title">
-                        <span className="data-category">[카테고리명] </span>
-                        
-                        <span className="data-name">
-                            일기 제목일기 
-                        </span>
-                    </div>
-                    <div className="data-image">
-                        내 일기 1
-                        커버 이미지
-                    </div>
-                    
-                </div>
-            </div>
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('https://diary-be.azurewebsites.net/mydiaries/', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
 
+      const myDiaries = response.data.data;
+      console.log(myDiaries);
 
-            <div className="fix-buttons">
-                <Link to="/mydiaries" className="form-button">새 일기 쓰기</Link>
-                {/* <a href="/mydiaries" className="form-button">새 일기 쓰기</a> */}
-            </div>
-        </div>
-      </>
-    )
-}
+      const filteredEntries = myDiaries.flatMap(entry => {
+        return entry.Mydiaries.filter(diary => {
+          // Convert diary updated_at to Date object
+          const diaryDate = new Date(diary.updated_at);
+
+          // Compare the dates and cate_data_no
+          return diaryDate.toDateString() === selectedDate.toDateString() && diary.cate_data_no === 1;
+        });
+      });
+
+      setFilteredDiaries(filteredEntries);
+
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  const handleDateChange = date => {
+    setSelectedDate(date);
+  };
+
+  return (
+    <div>
+      <h2>Date Picker and Filtered Diaries</h2>
+      <DatePicker selected={selectedDate} onChange={handleDateChange} />
+      <h3>Selected Date: {selectedDate && selectedDate.toDateString()}</h3>
+      <ul>
+        {filteredDiaries.map(diary => (
+          <li key={diary.updated_at}>
+            <p>Diary Title: {diary.diary_title}</p>
+            <p>Diary Content: {diary.diary_content}</p>
+            {/* Add other properties as needed */}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 export default Diary;
+
