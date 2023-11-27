@@ -2,9 +2,12 @@
 import React, { useState } from "react";
 import EditorForm from "../editor/EditorForm";
 import { Link } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
 function DiaryDetail() {
-  
+    const location = useLocation();
+  const { diaryContent, selectedTheme, selectedText1} = location.state || {};
+
     return (
         <div className="wrap-page">
             {/* TodoList */}
@@ -14,10 +17,10 @@ function DiaryDetail() {
                 </div>
                 {/* Top Diary */}
                 <div className="top-diary">
-                    <span className="data-category">[카테고리명] </span>
+                    <span className="data-category">[] </span>
                     
                     <span className="data-name">
-                    일기 제목일기 제목일기 제목일기 제목일기 제목일기 제목일기 제목
+                        {diaryContent?.diary_title}
                     </span>
                 </div>
                 <div className="ui-day">
@@ -26,10 +29,13 @@ function DiaryDetail() {
                     </div>
                 </div>
 
-                {/* Editor */}
-                <div className="edit-detail">
-                    <EditorForm></EditorForm>
+                <div className="">
+                    <p>{diaryContent?.diary_content}</p>
+                    <p>{}</p>
+                
                 </div>
+
+
 
                 <div className="ui-buttons">
                     <a href="javascript:" className="form-button">수정</a>

@@ -49,9 +49,7 @@ function Diary() {
   const filteredEntries = () => {
     return myDiariesData.data?.filter(diaryEntry => {
       return diaryEntry.Mydiaries.some(myDiary => {
-        // Convert myDiary updated_at to Date object
         const diaryDate = new Date(myDiary.updated_at);
-        // Compare the dates
         return diaryDate.toDateString() === selectedDate.toDateString();
       });
     });

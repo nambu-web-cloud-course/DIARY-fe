@@ -1,5 +1,4 @@
 //로그인페이지
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -11,10 +10,14 @@ export default function Login() {
   const [errorMessage, setErrorMessage] = useState('');
 
   const navigate = useNavigate();
+//   const refreshPage=()=>{
+//     window.location.reload();
+// } 
+
   const handleLogin = async(e) => {
-
+    // refreshPage();
     e.preventDefault();
-
+    
     if(member_id === "" && password === "") {
       setErrorMessage("아이디와 비밀번호가 모두 입력되지 않았습니다.");
       //alert("아이디와 비밀번호가 모두 입력되지 않았습니다.");
@@ -50,17 +53,19 @@ export default function Login() {
       })
       .then(function(obj) {
         console.log(obj.data);
-        localStorage.setItem("refresh_token", "Bearer "+obj.data.token);
-        console.log(localStorage.getItem("refresh_token"));
+        localStorage.setItem("token", obj.data.token);
+        console.log(localStorage.getItem("token"));
         const config = {
           headers: {
             // 로컬스토리지에 토큰 저장되어 있는지 확인
-            Authorization: localStorage.getItem("refresh_token"),
+            Authorization: 'Bearer '+ localStorage.getItem("token"),
             //Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtaWQiOjIsImlhdCI6MTcwMDQ4Mjc1N30.OQAp0PJEFnloRgLu75WcG4cieWYv8u88evxtBluCDpE',
           },
         };
         // axios.get('http://localhost:8080/members', config)
-        axios.get('https://diary-be.azurewebsites.net/members', config)
+        console.log('axios.get');
+
+        axios.get('https://diary-be.azurewebsites.net/members/memberinfo', config)
           .then(function (response) {
             console.log(response.data);
 
@@ -69,8 +74,10 @@ export default function Login() {
               localStorage.setItem("member_name", response.data.data.member_name );
               // alert(localStorage.getItem("member_id"));
               alert(response.data.data.member_name + "님 환영합니다. 홈으로 이동합니다");
-              window.location.href = "/";//로그인 후 홈으로 이동
+              //window.location.href = "/";//로그인 후 홈으로 이동
               navigate('/');
+              window.location.reload();
+
             } else {
               alert('로그인에 실패하였습니다. 다시 로그인해주세요')
               setMemberId('');
@@ -91,7 +98,6 @@ export default function Login() {
         //alert("아이디 또는 비밀번호가 일치하지 않습니다.")
       })
     }
-
   };
     
 
@@ -140,9 +146,7 @@ export default function Login() {
                   className="form-input"/>
               </div>
 
-              <button onClick={handleLogin} className="form-button">로그인</button>
-
-    
+             <Link onClick={handleLogin} className="form-button">로그인</Link> {' '}
               <Link to="/register" className="form-button">회원가입</Link> {' '}
               <button onClick={openChangePwWindow}>비밀번호 변경</button>
        

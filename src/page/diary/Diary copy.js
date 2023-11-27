@@ -4,7 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
 
 const Diary = () => {
-    const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [filteredDiaries, setFilteredDiaries] = useState([]);
 

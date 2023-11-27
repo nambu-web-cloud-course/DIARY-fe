@@ -5,25 +5,32 @@ import axios from "axios";
 import Modal from 'react-modal';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+
 
 // import MyButton from "./MyButton";
 const Editor = () => {
   
   let subtitle;
   const token = localStorage.getItem("token");
- 
   const navigate = useNavigate();
+ 
   const [diaryContent, setDiaryContent] = useState({
     diary_title:'',
-    diary_content: ''
+    diary_content: '',
+    cate_data_no:''
   });
   
   const submitReview = () => {
+    navigate('/diarydetail', { state: { diaryContent } });
     axios.post(
       'https://diary-be.azurewebsites.net/mydiaries',
       {
         diary_title: diaryContent.diary_title,
         diary_content: diaryContent.diary_content,
+        cate_data_no:'1',
+
+
         theme_no : selectedTheme.id,
         cate_data_no : selectedText1.id,
       },
@@ -35,7 +42,6 @@ const Editor = () => {
     )
       .then((res) => {
         alert('등록성공');
-        navigate('/diarydetail', { state: { diaryContent, selectedTheme, themeImages } });
       })
       .catch((error) => {
         console.log(error);
@@ -311,8 +317,8 @@ function handleImageClick(image){
         />
       </section>
       <div className="ui-buttons">
-        <button type="button" className="form-button" onClick={submitReview}>저장</button>
-        <button type="button" className="form-button" >취소</button>
+      <button type="button" className="form-button" onClick={submitReview}>저장</button>
+          <button type="button" className="form-button" onClick={() => navigate(-1, { replace: true })}>취소</button>
         </div>
 
 

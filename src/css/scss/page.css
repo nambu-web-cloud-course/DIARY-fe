@@ -278,7 +278,15 @@ button:disabled, input:disabled {
    Calendar
 ***************************************************************************************/
 .react-calendar__tile.highlight {
-  border: 1px solid red;
+  border-bottom: 1px solid red;
+}
+
+.react-calendar__tile.highlight2 {
+  border-top: 1px solid blue;
+}
+
+.react-calendar__tile.highlight3 {
+  border: 1px solid green;
 }
 
 .page-gallary .react-datepicker__day-names,
@@ -309,6 +317,27 @@ button:disabled, input:disabled {
 
 .react-datepicker__day-name, .react-datepicker__day, .react-datepicker__time-name {
   color: #5f5352;
+}
+
+/***************************************************************************************
+   ckeditor
+***************************************************************************************/
+.wrap-ckeditor {
+  position: relative;
+}
+.wrap-ckeditor .bg-editor {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.wrap-ckeditor .bg-editor img {
+  width: 100%;
+  height: 100%;
+}
+.wrap-ckeditor .bg-editor + div + .ck-editor .ck-editor__main > .ck-editor__editable {
+  background: none !important;
 }
 
 /***************************************************************************************

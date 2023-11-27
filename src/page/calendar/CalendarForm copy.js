@@ -12,8 +12,8 @@ function CalendarForm({}) {
   const [selectedDate, setSelectedDate] = useState([]);
   const [matchingDay, setMatchingDay] = useState([]);
   const [matchingDayTodo, setMatchingDayTodo] = useState([]);
-  const [selectedDiaryTitles, setSelectedDiaryTitles] = useState([]);
-  const [selectedTodoContents, setSelectedTodoContents] = useState([]);
+  const [selectedDiaryTitles, setSelectedDiaryTitles] = useState(new Date());
+  const [selectedTodoContents, setSelectedTodoContents] = useState(new Date());
  
 
   useEffect(() => {
@@ -26,7 +26,9 @@ function CalendarForm({}) {
     axios.get(
       'https://diary-be.azurewebsites.net/todos',
       {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: {
+          'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtaWQiOjEsImlhdCI6MTcwMDM3MDUzMX0.2NNWyqziEVRSjh3Ob-hYDvDHHHMZvMGJybOA7bg6SZw`,
+        },
       }
     )
       .then(res => {
@@ -55,9 +57,6 @@ function CalendarForm({}) {
   };
   const formattedDates = toDos.data && toDos.data.map(data => moment(data.updated_at).format('DD-MM-YYYY'));
   const formattedDates2 = toDiary.data && toDiary.data.flatMap(data =>
-    data.Mydiaries.map(diary => moment(diary.updated_at).format('DD-MM-YYYY'))
-  );
-  const formattedDates3 = toDiary.data && toDiary.data.flatMap(data =>
     data.Mydiaries.map(diary => moment(diary.updated_at).format('DD-MM-YYYY'))
   );
   
@@ -100,6 +99,7 @@ function CalendarForm({}) {
       setSelectedTodoContents(todosContents);
 
   }
+
   console.log('matchingTodos',selectedTodoContents)
   console.log('matchingdiary',selectedDiaryTitles)
   return (
@@ -114,7 +114,7 @@ function CalendarForm({}) {
           if (formattedDates2?.find(formattedDate => formattedDate === moment(date).format('DD-MM-YYYY'))) {
             return 'highlight2';
           }
-          if (formattedDates3?.find(x => x === moment(date).format('DD-MM-YYYY'))) {
+          if (formattedDates2?.find(formattedDate => formattedDate === moment(date).format('DD-MM-YYYY')) && formattedDates?.find(x => x === moment(date).format('DD-MM-YYYY'))) {
             return 'highlight3';
           }
         }}
