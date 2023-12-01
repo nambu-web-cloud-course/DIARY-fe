@@ -134,7 +134,7 @@ button:disabled, input:disabled {
 .layout-header .header-top .data-id strong {
   color: #836a58;
 }
-.layout-header .header-top .data-id:before {
+.layout-header .header-top .data-id i {
   display: inline-block;
   background: url(../../images/icon-user.png) no-repeat;
   content: "";
@@ -560,6 +560,7 @@ button:disabled, input:disabled {
 }
 
 .data-nodata {
+  width: 100%;
   padding: 50px 0;
   text-align: center;
   color: #48352e;
@@ -724,9 +725,6 @@ button:disabled, input:disabled {
   display: flex;
   margin: 10px 0 0 0;
   flex-direction: column;
-}
-.page-diary .wrap-file.image-selected .form-file input {
-  display: none;
 }
 .page-diary .wrap-file.image-selected .form-file .txt-file {
   display: none;

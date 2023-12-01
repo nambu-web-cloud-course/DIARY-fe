@@ -44,7 +44,6 @@ const Gallery = () => {
             data: response.data.data,
           });
         } else {
-          alert("가져올 갤러리가 없습니다.");
           setImages([]);
         }
       }
@@ -97,21 +96,23 @@ const Gallery = () => {
 
         {/* 이미지를 나타내는 부분 */}
         <div className="wrap-gallery">
-      
-            {images.data &&
-              images.data.map((image) => (
-                <div className="ui-gallery" key={image.diary_no}>
-                <img
-                
-                  key={image.diary_no}
-                  src={image.image_path}
-                  alt={image.image_path}
-                  onClick={() => {
-                    handleImageClick(image);
-                  }}
-                />
-                </div>
-              ))}
+        {images.data && images.data.length > 0 ? (
+          images.data.map((image) => (
+            <div className="ui-gallery" key={image.diary_no}>
+              <img
+                src={image.image_path}
+                alt={image.image_path}
+                onClick={() => {
+                  handleImageClick(image);
+                }}
+              />
+            </div>
+          ))
+        ) : (
+          <div className="data-nodata">
+            가져올 이미지가 없습니다.
+          </div>
+        )}
         </div>
       </div>
     </>

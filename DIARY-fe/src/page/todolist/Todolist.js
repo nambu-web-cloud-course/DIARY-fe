@@ -180,11 +180,50 @@ const Todolist = () => {
     const formattedDate = new Date(dateString).toLocaleDateString("ko-KR", options);
     return formattedDate;
   };
+  // 날짜 포맷 함수
+  const formatDate = (dateString) => {
+    // 월, 일을 2자리 숫자로 표시하는 함수
+    const formatNumber = (num) => (num < 10 ? `0${num}` : num);
 
+    // 요일 배열
+    const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
+
+    // 년, 월, 일, 요일을 추출합니다.
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = formatNumber(date.getMonth() + 1);
+    const day = formatNumber(date.getDate());
+    const dayOfWeek = daysOfWeek[date.getDay()];
+
+    // 최종적인 형식으로 조합하여 반환합니다.
+    return `${year}.${month}.${day}(${dayOfWeek})`;
+  };
 
   return (
     <div>
       <div className="page-todolist">
+        <div className="ui-today">
+          <div className="txt-today">오늘은 <span className="data-today">{formatDate(new Date())} </span> 입니다.</div>
+        
+        </div>
+        <div className="ui-todo">
+          <div className="todo-label">
+          새로운 Todo 작성하기
+          </div>
+          <form className="form-type" onSubmit={addTodo}>
+            <input
+              ref={contentRef}
+              type="text"
+              id="newTodo"
+              name="todo_content"
+              placeholder="Todo 리스트를 추가해주세요 "
+              className="form-input"
+              value={newTodo}
+              onChange={(e) => setNewTodo(e.target.value)}
+            />
+            <button className="form-button">추가</button>
+          </form>
+        </div>
         <div className="page-title">
           Todo 리스트
             {/* <DatePicker selected={selectedDate} onChange={handleDateChange} value={selectedDate} /> */}
@@ -207,19 +246,7 @@ const Todolist = () => {
            
           </div>
 
-          <form className="form-type" onSubmit={addTodo}>
-            <input
-              ref={contentRef}
-              type="text"
-              id="newTodo"
-              name="todo_content"
-              placeholder="Todo 리스트를 추가해주세요 "
-              className="form-input"
-              value={newTodo}
-              onChange={(e) => setNewTodo(e.target.value)}
-            />
-            <button className="form-button">추가</button>
-          </form>
+       
 
           {/* Form */}
           <div className="form-type">
