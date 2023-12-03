@@ -282,10 +282,14 @@ const Editor = () => {
     closeModal2(); //클릭 시 모달을 닫도록 추가
     setSelectedImageTitle(image.themeimg_title); // 이미지 클릭 시 해당 이미지의 제목을 저장
   }
-
+  const [selectedFile, setSelectedFile] = useState(null);
   const handleImageChange = (e) => {
-    // const selectedFiles = e.target.files[0];
-    const imageFiles = e.target.files;
+      //파일명 가져오기
+      const file = e.target.files[0];
+      setSelectedFile(file);
+  
+      // const selectedFiles = e.target.files[0];
+      const imageFiles = e.target.files;
 
     if (imageFiles) {
       console.log(imageFiles);
@@ -306,6 +310,7 @@ const Editor = () => {
   };
 
   function handleImageDelete() {
+    setSelectedFile('');
     if (selectedImage) {
       // 수정 상태의 이미지 삭제의 경우 서버 데이터 삭제 처리
       if (selectedImage.id > 0) {
@@ -324,7 +329,15 @@ const Editor = () => {
       fileContentRef.current.value = "";
     }
   }
-
+  const [wrapFileClass, setWrapFileClass] = useState('');
+  useEffect(() => {
+    // selectedImage가 변경될 때마다 클래스를 업데이트
+    if (selectedImage && selectedImage.image_path) {
+      setWrapFileClass('image-selected');
+    } else {
+      setWrapFileClass('');
+    }
+  }, [selectedImage]);
   return (
     <div className="Editor">
       <section>
@@ -332,7 +345,6 @@ const Editor = () => {
           <button onClick={openModal1} className="data-category">
             카테고리
           </button>
-          <span>&nbsp;</span>
 
           <Modal
             id="cate-modal"
@@ -343,130 +355,128 @@ const Editor = () => {
           >
             {/* 모달내용 */}
 
-            {/* 모달창 스크롤기능*/}
-            <div id="modal-scrollable" className="modal-scrollable">
-              <h2 ref={(_subtitle) => (subtitle = _subtitle)}></h2>
-              <span>&nbsp;</span>
-              <span>&nbsp;</span>
-              <p>
-                <h3>카테고리를 선택하세요.</h3>
-              </p>
-              <span>&nbsp;</span>
-              <span>&nbsp;</span>
-              <span>&nbsp;</span>
-              <span>&nbsp;</span>
+          {/* 모달창 스크롤기능*/}
+          <div id="modal-scrollable" className="modal-scrollable">
+            <h2 ref={(_subtitle) => (subtitle = _subtitle)}></h2>
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+            <p>
+              <h3>카테고리를 선택하세요.</h3>
+            </p>
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
 
-              <div ref={modalContentRef1}>
-                {" "}
-                {/* 모달 내부 마우스 클릭 시 텍스트 전체 선택 */}
-                {/* 카테고리 내용 */}
-                {cateInfo.data &&
-                  cateInfo.data.map((cate) => (
-                    <div
-                      key={cate.id}
-                      alt={cate.cate_data}
-                      onClick={() => {
-                        handleTextClick1(cate);
-                      }}
-                    >
-                      {cate.cate_data}
-                    </div>
-                  ))}
-              </div>
-
-              {/* 'close'버튼은 모달 외부로 이동 */}
-              <button
-                onClick={closeModal1}
-                className="modal-close"
-                style={{
-                  position: "absolute",
-                  top: "20px",
-                  right: "20px",
-                }}
-              >
-                close
-              </button>
-            </div>
-          </Modal>
-
-          {/* 모달이 닫힌 후에 선택한 텍스트를 표시 */}
-          {selectedText1 ? (
-            <div>
-              <p>{selectedText1.cate_data}&nbsp;&nbsp;</p>
-            </div>
-          ) : (
-            <p></p>
-          )}
-
-          {/* 모달이 닫힌 후에 기본텍스트 업데이트 */}
-          <div>
-            <p>{baseText1}</p>
-          </div>
-
-          <div className="top-diary">
-            <button onClick={openModal2}>
-              <span className="data-category">배경 선택</span>
-            </button>
-            <p>{selectedImageTitle}</p>
-
-            <Modal
-              id="cate-modal2"
-              isOpen={modal2IsOpen}
-              // onAfterOpen={afterOpenModal}
-              onRequestClose={closeModal2}
-              contentLabel="Modal 2"
-            >
-              {/* 모달내용 */}
-              <h2 ref={(_subtitle) => (subtitle = _subtitle)}></h2>
-
-              {/* 모달창 스크롤기능 */}
-              <div id="modal-scrollable" className="modal-scrollable">
-                <div ref={modalContentRef2}>
-                  {/* 모달 내부 마우스 클릭 시 텍스트 전체 선택 */}
-
-                  {/* 배경테마 이미지 */}
-                  <span>&nbsp;</span>
-                  <span>&nbsp;</span>
-                  <p>
-                    <h3>배경테마를 선택하세요.</h3>
-                  </p>
-                  <span>&nbsp;</span>
-                  <span>&nbsp;</span>
-                  <div className="image-gallery">
-                    {themeImages.data &&
-                      themeImages.data.map((image) => (
-                        <div key={image.id}>
-                          <img
-                            width={400}
-                            height={200}
-                            key={image.id}
-                            src={image.themeimg_path}
-                            alt={image.themeimg_title}
-                            onClick={() => {
-                              handleImageClick(image);
-                            }}
-                          />
-                          <p>{image.themeimg_title}</p>
-                        </div>
-                      ))}
-                  </div>
-
-                  {/* 'close'버튼은 모달 외부로 이동 */}
-                  <button
-                    onClick={closeModal2}
-                    className="modal-close"
-                    style={{
-                      position: "absolute",
-                      top: "20px",
-                      right: "20px",
+            <div ref={modalContentRef1}>
+              {" "}
+              {/* 모달 내부 마우스 클릭 시 텍스트 전체 선택 */}
+              {/* 카테고리 내용 */}
+              {cateInfo.data &&
+                cateInfo.data.map((cate) => (
+                  <div
+                    key={cate.id}
+                    alt={cate.cate_data}
+                    onClick={() => {
+                      handleTextClick1(cate);
                     }}
                   >
-                    close
-                  </button>
-                </div>
-              </div>
-            </Modal>
+                    {cate.cate_data}
+                  </div>
+                ))}
+            </div>
+
+            {/* 'close'버튼은 모달 외부로 이동 */}
+            <button
+              onClick={closeModal1}
+              className="modal-close"
+              style={{
+                position: "absolute",
+                top: "20px",
+                right: "20px",
+              }}
+            >
+              close
+            </button>
           </div>
+        </Modal>
+
+        {/* 모달이 닫힌 후에 선택한 텍스트를 표시 */}
+        {selectedText1 ? (
+          <div>
+            <p>{selectedText1.cate_data}&nbsp;&nbsp;</p>
+          </div>
+        ) : (
+          <p></p>
+        )}
+
+        {/* 모달이 닫힌 후에 기본텍스트 업데이트 */}
+        <div>
+          <p>{baseText1}</p>
+        </div>
+
+          <button onClick={openModal2}>
+            <span className="data-category">배경 선택</span>
+          </button>
+          <p>{selectedImageTitle}</p>
+
+          <Modal
+            id="cate-modal2"
+            isOpen={modal2IsOpen}
+            // onAfterOpen={afterOpenModal}
+            onRequestClose={closeModal2}
+            contentLabel="Modal 2"
+          >
+            {/* 모달내용 */}
+            <h2 ref={(_subtitle) => (subtitle = _subtitle)}></h2>
+
+            {/* 모달창 스크롤기능 */}
+            <div id="modal-scrollable" className="modal-scrollable">
+              <div ref={modalContentRef2}>
+                {/* 모달 내부 마우스 클릭 시 텍스트 전체 선택 */}
+
+                {/* 배경테마 이미지 */}
+                <span>&nbsp;</span>
+                <span>&nbsp;</span>
+                <p>
+                  <h3>배경테마를 선택하세요.</h3>
+                </p>
+                <span>&nbsp;</span>
+                <span>&nbsp;</span>
+                <div className="image-gallery">
+                  {themeImages.data &&
+                    themeImages.data.map((image) => (
+                      <div key={image.id}>
+                        <img
+                          width={400}
+                          height={200}
+                          key={image.id}
+                          src={image.themeimg_path}
+                          alt={image.themeimg_title}
+                          onClick={() => {
+                            handleImageClick(image);
+                          }}
+                        />
+                        <p>{image.themeimg_title}</p>
+                      </div>
+                    ))}
+                </div>
+
+                {/* 'close'버튼은 모달 외부로 이동 */}
+                <button
+                  onClick={closeModal2}
+                  className="modal-close"
+                  style={{
+                    position: "absolute",
+                    top: "20px",
+                    right: "20px",
+                  }}
+                >
+                  close
+                </button>
+              </div>
+            </div>
+          </Modal>
         </div>
       </section>
       <section>
@@ -529,8 +539,8 @@ const Editor = () => {
         <h2>Saved Diary Content</h2>
         <p>{diaryContent.diary_content}</p>
       </div> */}
-
-      <div>
+     
+      {/* <div>
         <input type="file" onChange={handleImageChange} ref={fileContentRef} />
         {selectedImage && selectedImage.image_path && (
           <div>
@@ -544,7 +554,34 @@ const Editor = () => {
             </button>
           </div>
         )}
+      </div> */}
+
+      <div className={`wrap-file ${wrapFileClass}`}>
+
+        <div className="ui-file">
+          <div className="form-file">
+       
+              <input type="file" onChange={handleImageChange}  ref={fileContentRef}/>
+
+              <span className="txt-file">사진을 선택해주세요.</span>
+    
+      
+            {selectedImage && selectedImage.image_path && (
+              <div className="image-file">
+                <img src={selectedImage.image_path} alt="Selected" />
+              
+              </div>
+            )}
+          </div>
+          <button className="form-button" onClick={handleImageDelete}>파일 삭제</button>
+        
+         </div>
+     
+         {selectedFile && (
+            <p className="select-file">파일명: <strong>{selectedFile.name}</strong></p>
+          )}
       </div>
+    
     </div>
   );
 };

@@ -729,6 +729,10 @@ button:disabled, input:disabled {
 .page-diary .wrap-file.image-selected .form-file .txt-file {
   display: none;
 }
+.page-diary .wrap-file.image-selected .form-file {
+  border: none;
+  background: none;
+}
 .page-diary .wrap-file .ui-file {
   display: flex;
   align-items: flex-end;
