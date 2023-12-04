@@ -341,127 +341,127 @@ const Editor = () => {
     <div className="Editor">
       <section>
         <div className="top-diary">
-          <button onClick={openModal1} className="data-category">
-            카테고리
-          </button>
-
-          <Modal
-            id="cate-modal"
-            isOpen={modal1IsOpen}
-            // onAfterOpen={afterOpenModal}
-            onRequestClose={closeModal1}
-            contentLabel="Modal 1"
-          >
-            {/* 모달내용 */}
-
-          {/* 모달창 스크롤기능*/}
-          <div id="modal-scrollable" className="modal-scrollable">
-            <h2 ref={(_subtitle) => (subtitle = _subtitle)}></h2>
-     
-            <p className="modal-title">카테고리를 선택하세요.</p>
-
-            <ul className="list-modal" ref={modalContentRef1}>
-              {" "}
-              {/* 모달 내부 마우스 클릭 시 텍스트 전체 선택 */}
-              {/* 카테고리 내용 */}
-              {cateInfo.data &&
-                cateInfo.data.map((cate) => (
-                  <li
-                    key={cate.id}
-                    alt={cate.cate_data}
-                    onClick={() => {
-                      handleTextClick1(cate);
-                    }}
-                  >
-                    {cate.cate_data}
-                  </li>
-                ))}
-            </ul>
-
-            {/* 'close'버튼은 모달 외부로 이동 */}
-            <button
-              onClick={closeModal1}
-              className="modal-close"
-            >
+    
+          <div className="ui-select">
+            <button onClick={openModal1} className="data-category">
+              카테고리
             </button>
-          </div>
-        </Modal>
 
-        {/* 모달이 닫힌 후에 선택한 텍스트를 표시 */}
-        {selectedText1 ? (
-          <div>
-            <p>{selectedText1.cate_data}&nbsp;&nbsp;</p>
-          </div>
-        ) : (
-          <p></p>
-        )}
+            <Modal
+              id="cate-modal"
+              isOpen={modal1IsOpen}
+              // onAfterOpen={afterOpenModal}
+              onRequestClose={closeModal1}
+              contentLabel="Modal 1"
+            >
+              {/* 모달내용 */}
 
-        {/* 모달이 닫힌 후에 기본텍스트 업데이트 */}
-        <div>
-          <p>{baseText1}</p>
-        </div>
+            {/* 모달창 스크롤기능*/}
+            <div id="modal-scrollable" className="modal-scrollable">
+              <h2 ref={(_subtitle) => (subtitle = _subtitle)}></h2>
+      
+              <p className="modal-title">카테고리를 선택하세요.</p>
 
-          <button onClick={openModal2}>
-            <span className="data-category">배경 선택</span>
-          </button>
-          {/* 모달이 닫힌 후에 선택한 이미지를 표시 */}
-          {selectedTheme ? (
-            <p>{selectedTheme.themeimg_title}</p>
-          ) : null}
-   
-
-          <Modal
-            id="cate-modal2"
-            isOpen={modal2IsOpen}
-            // onAfterOpen={afterOpenModal}
-            onRequestClose={closeModal2}
-            contentLabel="Modal 2"
-          >
-            {/* 모달내용 */}
-            <h2 ref={(_subtitle) => (subtitle = _subtitle)}></h2>
-
-            {/* 모달창 스크롤기능 */}
-            <div id="modal-scrollable" className="modal-scrollable" ref={modalContentRef2} >
-              
-              {/* 모달 내부 마우스 클릭 시 텍스트 전체 선택 */}
-
-              {/* 배경테마 이미지 */}
-              <p className="modal-title">
-              배경테마를 선택하세요.
-              </p>
-              <div className="image-gallery">
-                {themeImages.data &&
-                  themeImages.data.map((image) => (
-                    <div key={image.id}>
-                      <img
-                        width={400}
-                        height={200}
-                        key={image.id}
-                        src={image.themeimg_path}
-                        alt={image.themeimg_title}
-                        onClick={() => {
-                          handleImageClick(image);
-                        }}
-                      />
-                      <p>{image.themeimg_title}</p>
-                    </div>
+              <ul className="list-modal" ref={modalContentRef1}>
+                {" "}
+                {/* 모달 내부 마우스 클릭 시 텍스트 전체 선택 */}
+                {/* 카테고리 내용 */}
+                {cateInfo.data &&
+                  cateInfo.data.map((cate) => (
+                    <li
+                      key={cate.id}
+                      alt={cate.cate_data}
+                      onClick={() => {
+                        handleTextClick1(cate);
+                      }}
+                    >
+                      {cate.cate_data}
+                    </li>
                   ))}
-              </div>
+              </ul>
 
               {/* 'close'버튼은 모달 외부로 이동 */}
               <button
-                onClick={closeModal2}
+                onClick={closeModal1}
                 className="modal-close"
-                style={{
-                  position: "absolute",
-                  top: "20px",
-                  right: "20px",
-                }}
               >
-                close
               </button>
             </div>
           </Modal>
+
+          {/* 모달이 닫힌 후에 선택한 텍스트를 표시 */}
+          {selectedText1 ? (
+            <div>
+              <p>{selectedText1.cate_data}&nbsp;&nbsp;</p>
+            </div>
+          ) : (
+            <p></p>
+          )}
+        </div>
+
+    
+        <div className="ui-select">
+
+            <button onClick={openModal2}>
+              <span className="data-category">배경 선택</span>
+            </button>
+            {/* 모달이 닫힌 후에 선택한 이미지를 표시 */}
+            {selectedTheme ? (
+              <p>{selectedTheme.themeimg_title}</p>
+            ) : null}
+   
+
+            <Modal
+              id="cate-modal2"
+              isOpen={modal2IsOpen}
+              // onAfterOpen={afterOpenModal}
+              onRequestClose={closeModal2}
+              contentLabel="Modal 2"
+            >
+              {/* 모달내용 */}
+              <h2 ref={(_subtitle) => (subtitle = _subtitle)}></h2>
+
+              {/* 모달창 스크롤기능 */}
+              <div id="modal-scrollable" className="modal-scrollable" ref={modalContentRef2} >
+                
+                {/* 모달 내부 마우스 클릭 시 텍스트 전체 선택 */}
+
+                {/* 배경테마 이미지 */}
+                <p className="modal-title">
+                배경테마를 선택하세요.
+                </p>
+                <div className="image-gallery">
+                  {themeImages.data &&
+                    themeImages.data.map((image) => (
+                      <div key={image.id}>
+                        <img
+                          key={image.id}
+                          src={image.themeimg_path}
+                          alt={image.themeimg_title}
+                          onClick={() => {
+                            handleImageClick(image);
+                          }}
+                        />
+                        <p>{image.themeimg_title}</p>
+                      </div>
+                    ))}
+                </div>
+
+                {/* 'close'버튼은 모달 외부로 이동 */}
+                <button
+                  onClick={closeModal2}
+                  className="modal-close"
+                  style={{
+                    position: "absolute",
+                    top: "20px",
+                    right: "20px",
+                  }}
+                >
+                  close
+                </button>
+              </div>
+            </Modal>
+          </div>
         </div>
       </section>
       <section>

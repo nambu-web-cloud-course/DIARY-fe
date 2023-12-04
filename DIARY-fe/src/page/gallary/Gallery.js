@@ -81,17 +81,19 @@ const Gallery = () => {
         <div class="page-title">갤러리</div>
         <div className="ui-top">
           <Calendar onClickMonth={handleDateChange} value={selectedDate} />
+          <div className="">
 
-          <select id="orderBy" value={orderBy} onChange={handleOrderByChange}>
-            {/* <option value="asc">최신순</option>
-                    <option value="desc">오래된순</option> */}
-            <option value="desc">최신순</option>
-            <option value="asc">오래된순</option>
-          </select>
+            <select id="orderBy" value={orderBy} onChange={handleOrderByChange}>
+              {/* <option value="asc">최신순</option>
+                      <option value="desc">오래된순</option> */}
+              <option value="desc">최신순</option>
+              <option value="asc">오래된순</option>
+            </select>
 
-          <button onClick={getGallery} className="form-button">
-            불러오기
-          </button>
+            <button onClick={getGallery} className="form-button">
+              불러오기
+            </button>
+          </div>
         </div>
 
         {/* 이미지를 나타내는 부분 */}

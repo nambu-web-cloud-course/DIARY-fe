@@ -837,6 +837,10 @@ button:disabled, input:disabled {
   align-items: center;
   margin-bottom: 10px;
 }
+.page-diary .top-diary .ui-select {
+  display: flex;
+  align-items: center;
+}
 .page-diary .top-diary .selected-text {
   margin-right: 10px;
 }
@@ -1018,6 +1022,22 @@ button:disabled, input:disabled {
   animation-timing-function: ease-in-out;
 }
 
+@media (max-width: 800px) {
+  .page-diary {
+    padding: 0 10px 50px 10px;
+  }
+  .page-diary .top-diary {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .page-diary .top-diary .ui-select {
+    display: flex;
+    align-items: center;
+  }
+  .page-diary .top-diary .ui-select + .ui-select {
+    margin-top: 10px;
+  }
+}
 /***************************************************************************************
    Page : Gallary
 ***************************************************************************************/
@@ -1052,7 +1072,6 @@ button:disabled, input:disabled {
   margin-left: 10px;
 }
 .page-gallery .ui-top select {
-  margin-left: 10px;
   font-size: 20px;
   line-height: 50px;
   height: 50px;
@@ -1092,6 +1111,32 @@ button:disabled, input:disabled {
   font-size: 20px;
 }
 
+@media (max-width: 800px) {
+  .page-gallery {
+    padding: 0 10px 50px 10px;
+  }
+  .page-gallery .ui-top {
+    left: 10px;
+    right: 10px;
+    flex-direction: column;
+  }
+  .page-gallery .ui-top .react-calendar {
+    width: 100% !important;
+  }
+  .page-gallery .ui-top select {
+    line-height: 30px;
+    height: 30px;
+    margin: 10px 0 0 0;
+  }
+  .page-gallery .ui-top .form-button {
+    height: 30px;
+    padding: 0;
+    font-size: 20px;
+  }
+  .page-gallery .wrap-gallery {
+    margin-top: 130px;
+  }
+}
 /***************************************************************************************
    Page : Login
 ***************************************************************************************/
@@ -1113,7 +1158,7 @@ button:disabled, input:disabled {
 }
 @media screen and (max-width: 720px) {
   .page-login .form-login {
-    padding: 0 50px;
+    padding: 0 20px;
     width: 100%;
     margin: 0 auto;
   }
@@ -1248,6 +1293,11 @@ button:disabled, input:disabled {
   width: 100%;
 }
 
+@media (max-width: 800px) {
+  .image-gallery div {
+    width: 50%;
+  }
+}
 #cate-modal2 {
   border: 2px solid #ef8c9e !important;
   padding: 0 !important;

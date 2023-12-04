@@ -730,7 +730,7 @@ button:disabled, input:disabled {
     flex-direction: column;;
     flex:auto;
     position:relative;
-   
+
     .wrap-file {
         display:flex;
         margin:10px 0 0 0;
@@ -873,6 +873,10 @@ button:disabled, input:disabled {
         display:flex;
         align-items: center;
         margin-bottom:10px;
+        .ui-select {
+            display:flex;
+            align-items: center;
+        }
         .selected-text {
             margin-right:10px;
         }
@@ -1070,9 +1074,28 @@ button:disabled, input:disabled {
         }
     }
 }
+
+@media (max-width: 800px) {
+    .page-diary {
+        padding:0 10px 50px 10px;
+        .top-diary {
+            flex-direction: column;
+            align-items:flex-start;
+            .ui-select {
+                display:flex;
+                align-items: center;
+                &+.ui-select {
+                    margin-top:10px;
+                }
+            }
+        }
+    }
+
+}
 /***************************************************************************************
    Page : Gallary
 ***************************************************************************************/
+
 .page-gallery {
     position:relative;
     padding:0 30px;
@@ -1105,7 +1128,6 @@ button:disabled, input:disabled {
 
         }
         select {
-            margin-left:10px;
             font-size:20px;
             line-height:50px;
             height:50px;
@@ -1150,6 +1172,34 @@ button:disabled, input:disabled {
     }
 }
 
+@media (max-width: 800px) {
+    .page-gallery {
+        padding:0 10px 50px 10px;
+        .ui-top {
+            left:10px;
+            right:10px;
+            flex-direction: column;;
+            .react-calendar {
+                width:100% !important;
+            }
+            select {
+                line-height:30px;
+                height:30px;
+                margin:10px 0 0 0;
+            }
+            .form-button {
+                height:30px;
+                padding:0;
+                font-size:20px;
+            }
+        }
+        .wrap-gallery {
+            margin-top:130px;
+        }
+       
+    }
+
+}
 /***************************************************************************************
    Page : Login
 ***************************************************************************************/
@@ -1172,7 +1222,7 @@ button:disabled, input:disabled {
     }
     @media screen and (max-width: 720px) {
         .form-login {
-            padding:0 50px;
+            padding:0 20px;
             width:100%;
     
             margin:0 auto;
@@ -1309,6 +1359,14 @@ button:disabled, input:disabled {
             width:100%;
         }
     }
+}
+@media (max-width: 800px) {
+    .image-gallery {
+        div {
+            width:50%;
+        }
+    }
+    
 }
 #cate-modal2 {
     border:2px solid #ef8c9e !important;
