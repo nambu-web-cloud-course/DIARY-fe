@@ -1335,6 +1335,7 @@ button:disabled, input:disabled {
 }
 .image-gallery div img {
   width: 100%;
+  height: 300px;
 }
 
 @media (max-width: 800px) {
@@ -1343,6 +1344,9 @@ button:disabled, input:disabled {
   }
   .image-gallery div {
     width: 50%;
+  }
+  .image-gallery div img {
+    height: 150px;
   }
 }
 #cate-modal2 {
