@@ -192,6 +192,15 @@ button:disabled, input:disabled {
   transition: all 0.3s;
 }
 
+.ui-main {
+  flex: auto;
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .layout-container {
   flex: auto;
   display: flex;
@@ -721,6 +730,14 @@ button:disabled, input:disabled {
   flex: auto;
   position: relative;
 }
+.page-diary .top-diary.type-diary {
+  flex-direction: row;
+  align-items: center;
+}
+.page-diary .top-diary.type-diary .data-category {
+  background-color: #d95428;
+  border: none;
+}
 .page-diary .wrap-file {
   display: flex;
   margin: 10px 0 0 0;
@@ -817,16 +834,23 @@ button:disabled, input:disabled {
   height: 440px !important;
 }
 .page-diary .wrap-detail {
+  margin-bottom: 10px;
   position: relative;
 }
-.page-diary .wrap-detail .diary-contents {
+.page-diary .wrap-detail .bg-image {
+  width: 100%;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+}
+.page-diary .wrap-detail .diary-contents {
   display: block;
   z-index: 1;
+  background-size: 100% 100%;
+  height: 455px;
+  overflow: auto;
 }
 .page-diary .wrap-photo img.diary-photo {
   max-width: 200px;
@@ -1023,8 +1047,17 @@ button:disabled, input:disabled {
 }
 
 @media (max-width: 800px) {
+  .page-title {
+    margin: 15px 0;
+  }
+  .page-calendar {
+    padding: 0 10px;
+  }
+  .page-calendar .ui-list .list-form li a {
+    font-size: 23px;
+  }
   .page-diary {
-    padding: 0 10px 50px 10px;
+    padding: 0 10px 105px 10px;
   }
   .page-diary .top-diary {
     flex-direction: column;
@@ -1100,6 +1133,7 @@ button:disabled, input:disabled {
 }
 .page-gallery .react-calendar {
   width: 300px !important;
+  margin-right: 10px;
 }
 .page-gallery .react-calendar .react-calendar__navigation {
   padding: 0;
@@ -1112,6 +1146,15 @@ button:disabled, input:disabled {
 }
 
 @media (max-width: 800px) {
+  .page-todolist {
+    padding: 0 10px 30px 10px;
+  }
+  .page-todolist .ui-today .data-today {
+    font-size: 35px;
+  }
+  .page-todolist .wrap-list .form-list li .form-button {
+    min-width: 60px;
+  }
   .page-gallery {
     padding: 0 10px 50px 10px;
   }
@@ -1122,6 +1165,7 @@ button:disabled, input:disabled {
   }
   .page-gallery .ui-top .react-calendar {
     width: 100% !important;
+    margin-right: 0;
   }
   .page-gallery .ui-top select {
     line-height: 30px;
@@ -1134,7 +1178,7 @@ button:disabled, input:disabled {
     font-size: 20px;
   }
   .page-gallery .wrap-gallery {
-    margin-top: 130px;
+    margin-top: 140px;
   }
 }
 /***************************************************************************************
@@ -1172,7 +1216,7 @@ button:disabled, input:disabled {
   text-align: center;
   font-size: 48px;
   font-weight: bold;
-  line-height: 48px;
+  line-height: 55px;
   color: #af7d59;
 }
 .page-login .txt-label {
@@ -1294,6 +1338,9 @@ button:disabled, input:disabled {
 }
 
 @media (max-width: 800px) {
+  .page-main .box-info {
+    padding: 10px;
+  }
   .image-gallery div {
     width: 50%;
   }

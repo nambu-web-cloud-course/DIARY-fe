@@ -122,7 +122,7 @@ function DiaryView() {
                     내가 쓴 일기
                 </div>
                 {/* Top Diary */}
-                <div className="top-diary">
+                <div className="top-diary type-diary">
                     <span className="data-category">[{diaries?.Cate_datum?.cate_data}] </span>
                     
                     <span className="data-name">
@@ -138,13 +138,12 @@ function DiaryView() {
 
                 <div className="wrap-detail">
                     {/* 테마 이미지를 나타내는 부분 */}
-                    <img
-                        style={{ width: 'calc(100% - 16px)', marginBottom: '16px' }}
+                    {/* <img
                         key={diaries?.Themeimg?.id}
                         src={diaries?.Themeimg?.themeimg_path}
-                        alt={diaries?.Themeimg?.themeimg_title}/>
+                        alt={diaries?.Themeimg?.themeimg_title} className="bg-image"/> */}
                
-                    <div className="diary-contents" dangerouslySetInnerHTML={{ __html: diaries?.diary_content }} />
+                    <div className="diary-contents" dangerouslySetInnerHTML={{ __html: diaries?.diary_content }} style={{backgroundImage: `url("${diaries?.Themeimg?.themeimg_path}")`}}/>
                 </div>
 
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
@@ -152,8 +151,6 @@ function DiaryView() {
                  {
                    diaries?.Galleries && diaries?.Galleries?.map((image)=>(
                              <img
-                             width={400}
-                             height={200}
                              key={image.diary_no}
                              src={image.image_path}
                              alt={image.image_path}

@@ -343,7 +343,7 @@ const Editor = () => {
         <div className="top-diary">
     
           <div className="ui-select">
-            <button onClick={openModal1} className="data-category">
+            <button onClick={openModal1} className="data-category type-select">
               카테고리
             </button>
 
