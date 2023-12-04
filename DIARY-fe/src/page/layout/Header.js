@@ -52,7 +52,7 @@ function Header() {
               </div>
                 {
                   isLogin === true
-                  ? <div className="data-id"><i></i><strong>{member_id}</strong> 님 환영합니다.</div> 
+                  ? <div className="data-id"><i></i><strong>{member_id}</strong> </div> 
                   : <div className="data-id"></div> 
                 }
                 <div className="ui-right">

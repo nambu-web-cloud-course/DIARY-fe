@@ -233,6 +233,22 @@ const Todolist = () => {
             입니다.
           </div>
         </div>
+        <div className="data-day">
+          <button
+            onClick={() => handleDateChange("prev")}
+            className="btn-prev"
+          >
+            이전
+          </button>
+          <span>{formatDateWithDay(selectedDate)}</span>
+          <button
+            onClick={() => handleDateChange("next")}
+            className="btn-next"
+          >
+            다음
+          </button>
+        </div>
+
         <div className="ui-todo">
           <div className="todo-label">새로운 Todo 작성하기</div>
           <form className="form-type" onSubmit={addTodo}>
@@ -260,22 +276,7 @@ const Todolist = () => {
           /> */}
         </div>
         <div className="page-contents">
-          <div className="data-day">
-            <button
-              onClick={() => handleDateChange("prev")}
-              className="btn-prev"
-            >
-              이전
-            </button>
-            <span>{formatDateWithDay(selectedDate)}</span>
-            <button
-              onClick={() => handleDateChange("next")}
-              className="btn-next"
-            >
-              다음
-            </button>
-          </div>
-
+          
           {/* Form */}
           <div className="form-type">
             <input

@@ -1204,6 +1204,8 @@ button:disabled, input:disabled {
 
 .modal-scrollable {
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-close {
@@ -1215,6 +1217,7 @@ button:disabled, input:disabled {
   position: absolute;
   top: 20px;
   right: 20px;
+  font-size: 0;
 }
 
 .image-gallery {
@@ -1225,11 +1228,18 @@ button:disabled, input:disabled {
   flex-wrap: wrap;
 }
 .image-gallery div {
+  position: relative;
   width: 33.333%;
   padding: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.image-gallery div p {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px;
 }
 .image-gallery div img {
   width: 100%;
