@@ -259,7 +259,6 @@ const Editor = () => {
   }
 
   function openModal2() {
-    iniPage();
     setModal2IsOpen(true);
     console.log("OpenMoal2");
   }

@@ -726,6 +726,9 @@ button:disabled, input:disabled {
   margin: 10px 0 0 0;
   flex-direction: column;
 }
+.page-diary .wrap-file.image-selected .form-file:before {
+  display: none;
+}
 .page-diary .wrap-file.image-selected .form-file .txt-file {
   display: none;
 }
@@ -947,7 +950,7 @@ button:disabled, input:disabled {
   height: 100%;
   zoom: 0.5;
 }
-.page-diary .box-diary .data-image .diary-contents p {
+.page-diary .box-diary .data-image .diary-contents p, .page-diary .box-diary .data-image .diary-contents h2 {
   height: 11px;
 }
 

@@ -737,6 +737,9 @@ button:disabled, input:disabled {
         flex-direction: column;;
         &.image-selected {
             .form-file {
+                &:before {
+                    display:none;
+                }
                 .txt-file {
                     display:none;
                 }
@@ -988,7 +991,7 @@ button:disabled, input:disabled {
                 width:100%;
                 height:100%;
                 zoom:0.5;
-                p {
+                p, h2 {
                     height:11px;
                 }
 

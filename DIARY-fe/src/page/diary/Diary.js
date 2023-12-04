@@ -108,8 +108,7 @@ function Diary() {
                   key={myDiary.id}
                   src={myDiary.Themeimg?.themeimg_path}
                   alt={myDiary.Themeimg?.themeimg_path}
-                />
-                <div className="diary-contents" dangerouslySetInnerHTML={{ __html: myDiary?.diary_content }} />
+                /><div className="diary-contents" dangerouslySetInnerHTML={{ __html: myDiary?.diary_content }} />
               </div>
             </div>
           ))

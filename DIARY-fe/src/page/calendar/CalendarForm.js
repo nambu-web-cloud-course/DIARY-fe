@@ -110,7 +110,8 @@ function CalendarForm() {
 
   // toso 선택시 이동
   function handleTodoClick(myTodo){
-    navigate('/todolist');
+    console.log('/myTodo' + myTodo.id );
+    navigate('/todolist?id=' + myTodo.id);
   };
 
   // 일자변경시 처리
